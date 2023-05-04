@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@emotion/react": "^11.10.8",
@@ -67,8 +68,5 @@
       "pattern": "^GQL-\\d{1,2}\\s(init|feat|fix|refactor|docs)\\((.+?)\\):\\s(.+?)",
       "errorMessage": "Invalid commit comment"
     }
-  },
-  "resolutions": {
-    "styled-components": "^5"
   }
 }
