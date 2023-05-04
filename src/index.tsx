@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { SnackbarProvider } from 'notistack';
 import '@fontsource/roboto';
 
-import App from './App';
+import { App } from './App';
 // import { store } from './redux/store';
 import './i18n';
 
