@@ -1,6 +1,6 @@
 import styles from './Footer.module.css';
 
-const Footer = () => (
+export const Footer = () => (
   <footer className={styles.footer}>
     <a href="https://github.com/vladyka-nazarii">
       <img className={styles.img} src="./github.svg" alt="GitHub"></img>
@@ -11,5 +11,3 @@ const Footer = () => (
     </a>
   </footer>
 );
-
-export default Footer;
