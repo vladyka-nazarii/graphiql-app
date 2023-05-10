@@ -5,7 +5,9 @@ import { AppRoutes } from './routes/AppRoutes';
 export const App = () => (
   <>
     <Header />
-    <AppRoutes />
+    <main>
+      <AppRoutes />
+    </main>
     <Footer />
   </>
 );
