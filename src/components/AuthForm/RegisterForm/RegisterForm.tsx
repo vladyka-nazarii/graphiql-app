@@ -71,10 +71,8 @@ export const RegisterForm = () => {
             type="password"
             value={values.confirmPassword}
             onChange={handleChange}
-            error={touched.password && (!!errors.password || !!firebaseError.passwordError)}
-            helperText={
-              (touched.password && (errors.password || firebaseError.passwordError)) || ' '
-            }
+            error={touched.confirmPassword && !!errors.confirmPassword}
+            helperText={(touched.confirmPassword && errors.confirmPassword) || ' '}
           />
         </Stack>
         <Stack spacing={0.5}>
