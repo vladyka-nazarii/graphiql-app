@@ -9,10 +9,8 @@ export const signInUser = async (email: string, password: string) => {
     return await signInWithEmailAndPassword(auth, email, password);
   } catch (error) {
     switch (`${error}`) {
-      case EMAIL_ERROR:
-        throw new FirebaseError('Email Not Found');
-      case PASS_ERROR:
-        throw new FirebaseError('Wrong Password');
+      case EMAIL_ERROR || PASS_ERROR:
+        throw new FirebaseError('Wrong email or password');
       default:
         throw new FirebaseError(`${error}`);
     }

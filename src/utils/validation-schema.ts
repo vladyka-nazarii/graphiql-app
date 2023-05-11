@@ -11,7 +11,10 @@ const emailValidation = yup
 const passwordValidation = yup
   .string()
   .required('Password is required')
-  .matches(/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, 'Wrong password format');
+  .matches(/.{8,}/, 'At least 8 characters')
+  .matches(/[a-z]{1,}/i, 'At least 1 letter')
+  .matches(/[0-9]{1,}/, 'At least 1 number')
+  .matches(/[\W_]{1,}/i, 'At least 1 special symbol');
 
 const confirmPasswordValidation = yup
   .string()
