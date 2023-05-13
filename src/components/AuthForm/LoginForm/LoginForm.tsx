@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { FormikProvider, useFormik } from 'formik';
-import { Button, Stack, Typography } from '@mui/material';
+import { Button, CircularProgress, Stack, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 import { signInUser } from '../../../firebase/sign-in-user';
@@ -17,6 +18,7 @@ export interface ILogin {
 
 export const LoginForm = () => {
   const dispatch = useAppDispatch();
+  const [loading, setLoading] = useState(false);
   const formik = useFormik<ILogin>({
     initialValues: {
       email: '',
@@ -34,10 +36,13 @@ export const LoginForm = () => {
 
   const handleSignIn = async (email: string, password: string) => {
     try {
+      setLoading(true);
       const { user } = await signInUser(email, password);
+      setLoading(false);
       dispatch(setUser({ email: user.email, id: user.uid, token: user.refreshToken }));
     } catch (error) {
       if (error instanceof Error) {
+        setLoading(false);
         enqueueSnackbar(error.message, { variant: 'error' });
       }
     }
@@ -45,25 +50,29 @@ export const LoginForm = () => {
 
   return (
     <FormikProvider value={formik}>
-      <form onSubmit={handleSubmit}>
-        <Stack spacing={2} padding={'20px'} width={'300px'}>
-          <Typography variant="h4" gutterBottom align="center">
-            Sign In
-          </Typography>
-          <Stack spacing={0.5}>
-            <CustomTextInput name="email" title="Email" />
-            <PasswordInput />
-          </Stack>
-          <Stack spacing={0.5}>
-            <Button color="primary" variant="contained" fullWidth type="submit">
+      {loading ? (
+        <CircularProgress />
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <Stack spacing={2} padding={'20px'} width={'300px'}>
+            <Typography variant="h4" gutterBottom align="center">
               Sign In
-            </Button>
-            <Typography variant="subtitle1" gutterBottom>
-              or you can <Link to="/register">create new account</Link>
             </Typography>
+            <Stack spacing={0.5}>
+              <CustomTextInput name="email" title="Email" />
+              <PasswordInput />
+            </Stack>
+            <Stack spacing={0.5}>
+              <Button color="primary" variant="contained" fullWidth type="submit">
+                Sign In
+              </Button>
+              <Typography variant="subtitle1" gutterBottom>
+                or you can <Link to="/register">create new account</Link>
+              </Typography>
+            </Stack>
           </Stack>
-        </Stack>
-      </form>
+        </form>
+      )}
     </FormikProvider>
   );
 };
