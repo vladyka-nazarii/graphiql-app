@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { AppBar, Button, Container, Toolbar, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { AppBar, Button, ButtonGroup, Container, Toolbar, Typography } from '@mui/material';
 
 import { useAuth } from '../../hooks/useAuth';
 import { signOutUser } from '../../firebase/sign-out-user';
@@ -9,6 +10,7 @@ import { removeUser } from '../../redux/slices/userSlice';
 export const Header = () => {
   const { isAuth } = useAuth();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
 
   const signOutHandler = async () => {
@@ -38,11 +40,27 @@ export const Header = () => {
       <Container>
         <Toolbar sx={{ justifyContent: 'space-between' }}>
           <Typography variant="h6">GraphQl Playground</Typography>
-          {isAuth && (
-            <Button color="inherit" onClick={signOutHandler}>
-              Sign Out
-            </Button>
-          )}
+          <ButtonGroup variant="text">
+            {isAuth ? (
+              <>
+                <Button color="inherit" onClick={() => navigate('/')}>
+                  Go to the Main Page
+                </Button>
+                <Button color="inherit" onClick={signOutHandler}>
+                  Sign Out
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button color="inherit" onClick={() => navigate('/login')}>
+                  Login
+                </Button>
+                <Button color="inherit" onClick={() => navigate('/register')}>
+                  Register
+                </Button>
+              </>
+            )}
+          </ButtonGroup>
         </Toolbar>
       </Container>
     </AppBar>
