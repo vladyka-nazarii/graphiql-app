@@ -36,7 +36,10 @@ export const Header = () => {
   }, []);
 
   return (
-    <AppBar color={isScrolled ? 'secondary' : 'primary'} sx={{ transition: 'all 0.6s' }}>
+    <AppBar
+      color={isScrolled ? 'secondary' : 'primary'}
+      sx={{ transition: 'all 0.6s', position: 'sticky', top: '0' }}
+    >
       <Container>
         <Toolbar sx={{ justifyContent: 'space-between' }}>
           <Typography variant="h6">GraphQl Playground</Typography>
