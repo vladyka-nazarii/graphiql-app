@@ -3,6 +3,7 @@ import CodeMirror from '@uiw/react-codemirror';
 
 import { Schema } from '../../components/Schema/Schema';
 import { BasicTabs } from '../../components/Tabs/Tabs';
+import { ResponseData } from '../../components/ResponseData/ResponseData';
 
 import styles from './Main.module.scss';
 
@@ -15,19 +16,13 @@ export const Main = () => {
         <CodeMirror
           value="console.log('hello world!');"
           height="100%"
-          width="100%"
+          width="50vw"
           editable={true}
           theme="light"
         />
         <BasicTabs />
       </div>
-      <CodeMirror
-        value="console.log('hello world!');"
-        height="100%"
-        width="100%"
-        editable={false}
-        theme="light"
-      />
+      <ResponseData />
       <Schema />
       <img
         className={styles.play}
