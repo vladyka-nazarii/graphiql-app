@@ -1,0 +1,78 @@
+.wrapper {
+  flex-grow: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 80px;
+  max-width: 1440px;
+  margin: 0 auto;
+  font-family: 'Concert One', cursive;
+}
+
+.generalTitle {
+  font-size: 40px;
+  font-family: 'Ultra', serif;
+  border: 3px solid black;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.generalInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  max-width: 1024px;
+  text-align: justify;
+}
+
+.experienceList {
+  align-self: flex-start;
+  margin-left: 30px;
+}
+
+.teamInfo {
+  display: flex;
+  justify-content: space-around;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  flex-basis: 30%;
+}
+
+.memberImg {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+}
+
+.memberTitle {
+  font-size: 30px;
+}
+
+.memberSubtitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-style: italic;
+}
+
+.githubImg {
+  width: 30px;
+  transition: transform 0.3s;
+}
+
+.githubImg:hover {
+  transform: scale(1.1);
+}
+
+.memberInfo {
+  text-align: justify;
+}
