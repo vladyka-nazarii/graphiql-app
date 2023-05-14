@@ -1,10 +1,10 @@
-@import "/node_modules/normalize.css";
+@import '/node_modules/normalize.css';
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Roboto";
+  font-family: 'Roboto';
 }
 
 #root {
@@ -16,7 +16,13 @@
 main {
   flex-grow: 1;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
+}
+
+.cm-theme-light,
+.cm-theme-dark {
   width: 100%;
 }
