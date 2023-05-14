@@ -24,6 +24,7 @@
   align-items: center;
   gap: 30px;
   max-width: 1024px;
+  text-align: justify;
 }
 
 .experienceList {
@@ -35,6 +36,7 @@
   display: flex;
   justify-content: space-around;
   gap: 30px;
+  flex-wrap: wrap;
 }
 
 .member {
@@ -69,4 +71,8 @@
 
 .githubImg:hover {
   transform: scale(1.1);
+}
+
+.memberInfo {
+  text-align: justify;
 }

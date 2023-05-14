@@ -47,7 +47,7 @@ export const Welcome = () => {
               <img src="./github-black.svg" alt="github" className={styles.githubImg} />
             </a>
           </div>
-          <p>
+          <p className={styles.memberInfo}>
             Served as the team leader and was responsible for the basic layout of the project. As
             the leader, provided guidance and direction to the team while taking charge of designing
             and structuring the user interface.
@@ -62,7 +62,7 @@ export const Welcome = () => {
               <img src="./github-black.svg" alt="github" className={styles.githubImg} />
             </a>
           </div>
-          <p>
+          <p className={styles.memberInfo}>
             Specialized in Firebase logic and authentication for the project. Was responsible for
             implementing Firebase functionalities, such as user authentication and data storage, to
             enhance the project`s security.
@@ -77,7 +77,7 @@ export const Welcome = () => {
               <img src="./github-black.svg" alt="github" className={styles.githubImg} />
             </a>
           </div>
-          <p>
+          <p className={styles.memberInfo}>
             Was responsible for creating the welcome page of the project. Designed and implemented
             the initial page that greets users and sets the tone for the application.
           </p>
