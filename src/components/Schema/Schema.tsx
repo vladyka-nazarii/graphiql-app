@@ -7,12 +7,12 @@ export const Schema = () => {
 
   return (
     <>
-      <button
+      <div
         className={`${styles.button} ${open && styles.opened}`}
         onClick={() => setOpen((prev) => !prev)}
       >
         SCHEMA
-      </button>
+      </div>
       <div className={`${styles.schema} ${open && styles.opened}`}>Here must be a Scheme</div>
     </>
   );
