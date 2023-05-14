@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { FormikProvider, useFormik } from 'formik';
-import { Button, Stack, Typography } from '@mui/material';
+import { Button, CircularProgress, Stack, Typography } from '@mui/material';
 
 import { useAppDispatch } from '../../../hooks/redux-hooks';
 import { setUser } from '../../../redux/slices/userSlice';
@@ -17,6 +18,7 @@ export interface IRegister extends ILogin {
 
 export const RegisterForm = () => {
   const dispatch = useAppDispatch();
+  const [loading, setLoading] = useState(false);
 
   const formik = useFormik<IRegister>({
     initialValues: {
@@ -35,10 +37,13 @@ export const RegisterForm = () => {
 
   const handleSignUp = async (email: string, password: string) => {
     try {
+      setLoading(true);
       const { user } = await signUpUser(email, password);
       dispatch(setUser({ email: user.email, id: user.uid, token: user.refreshToken }));
+      setLoading(false);
     } catch (error) {
       if (error instanceof Error) {
+        setLoading(false);
         enqueueSnackbar(error.message, { variant: 'error' });
       }
     }
@@ -46,26 +51,30 @@ export const RegisterForm = () => {
 
   return (
     <FormikProvider value={formik}>
-      <form onSubmit={handleSubmit}>
-        <Stack spacing={2} padding={'20px'} width={'300px'}>
-          <Typography variant="h4" gutterBottom align="center">
-            Sign Up
-          </Typography>
-          <Stack spacing={0.5}>
-            <CustomTextInput name="email" title="Email" />
-            <PasswordInput />
-            <CustomTextInput name="confirmPassword" title="Confirm password" type="password" />
-          </Stack>
-          <Stack spacing={0.5}>
-            <Button color="primary" variant="contained" fullWidth type="submit">
+      {loading ? (
+        <CircularProgress />
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <Stack spacing={2} padding={'20px'} width={'300px'}>
+            <Typography variant="h4" gutterBottom align="center">
               Sign Up
-            </Button>
-            <Typography variant="subtitle1" gutterBottom>
-              if you <Link to="/login">already have account</Link>
             </Typography>
+            <Stack spacing={0.5}>
+              <CustomTextInput name="email" title="Email" />
+              <PasswordInput />
+              <CustomTextInput name="confirmPassword" title="Confirm password" type="password" />
+            </Stack>
+            <Stack spacing={0.5}>
+              <Button color="primary" variant="contained" fullWidth type="submit">
+                Sign Up
+              </Button>
+              <Typography variant="subtitle1" gutterBottom>
+                if you <Link to="/login">already have account</Link>
+              </Typography>
+            </Stack>
           </Stack>
-        </Stack>
-      </form>
+        </form>
+      )}
     </FormikProvider>
   );
 };
