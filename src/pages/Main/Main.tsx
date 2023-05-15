@@ -5,40 +5,44 @@ import { Schema } from '../../components/Schema/Schema';
 import { BasicTabs } from '../../components/Tabs/Tabs';
 
 import styles from './Main.module.scss';
+import { useResponse } from '../../hooks/useResponse';
+import { QUERY_EXAMPLE } from '../../apollo/queryExample';
 
 export const Main = () => {
-  const [request, setRequest] = useState(false);
+  const [query, setQuery] = useState(QUERY_EXAMPLE);
+  const [dataValue, setDataValue] = useState(query);
+  const { loading, data } = useResponse(dataValue);
+
+  const onClick = () => {
+    setDataValue(query);
+  };
 
   return (
     <div className={styles.main}>
       <div className={styles.query}>
         <CodeMirror
-          value="console.log('hello world!');"
+          value={QUERY_EXAMPLE}
           height="100%"
-          width="100%"
+          width="50vw"
           editable={true}
           theme="light"
+          onChange={(value: string) => setQuery(value)}
         />
         <BasicTabs />
       </div>
       <CodeMirror
-        value="console.log('hello world!');"
-        height="100%"
-        width="100%"
+        value={data}
+        height="calc(100vh - 64px - 64px)"
+        width="50vw"
         editable={false}
         theme="light"
       />
       <Schema />
       <img
         className={styles.play}
-        src={request ? './stop-button.svg' : './play-button.svg'}
+        src={loading ? './stop-button.svg' : './play-button.svg'}
         alt="play"
-        onClick={() => {
-          setRequest((prev) => !prev);
-          setTimeout(() => {
-            setRequest((prev) => !prev);
-          }, 1000);
-        }}
+        onClick={onClick}
       />
     </div>
   );
