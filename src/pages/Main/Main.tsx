@@ -1,24 +1,18 @@
 import { useState } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
-import { useQuery, gql } from '@apollo/client';
 
 import { Schema } from '../../components/Schema/Schema';
 import { BasicTabs } from '../../components/Tabs/Tabs';
 
 import styles from './Main.module.scss';
+import { useResponse } from '../../hooks/useResponse';
+import { QUERY_EXAMPLE } from '../../apollo/queryExample';
 
 export const Main = () => {
-  const queryExample = `query ExampleQuery {
-    company {
-      ceo
-    }
-  }
-  `;
-  const [query, setQuery] = useState(queryExample);
+  const [query, setQuery] = useState(QUERY_EXAMPLE);
   const [dataValue, setDataValue] = useState(query);
-  const { loading, error, data } = useQuery(gql`
-    ${dataValue}
-  `);
+  const { loading, data } = useResponse(dataValue);
+
   const onClick = () => {
     setDataValue(query);
   };
@@ -27,7 +21,7 @@ export const Main = () => {
     <div className={styles.main}>
       <div className={styles.query}>
         <CodeMirror
-          value={queryExample}
+          value={QUERY_EXAMPLE}
           height="100%"
           width="50vw"
           editable={true}
@@ -37,13 +31,7 @@ export const Main = () => {
         <BasicTabs />
       </div>
       <CodeMirror
-        value={
-          loading
-            ? 'Loading...'
-            : error
-            ? `Error : ${error.message}`
-            : JSON.stringify(data, null, '\t')
-        }
+        value={data}
         height="calc(100vh - 64px - 64px)"
         width="50vw"
         editable={false}
