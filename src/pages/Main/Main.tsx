@@ -12,16 +12,16 @@ export const Main = () => {
     company {
       ceo
     }
-    roadster {
-      apoapsis_au
-    }
   }
   `;
   const [query, setQuery] = useState(queryExample);
-  const GET_DATA = gql`
-    ${query}
-  `;
-  const { loading, error, data } = useQuery(GET_DATA);
+  const [dataValue, setDataValue] = useState(query);
+  const { loading, error, data } = useQuery(gql`
+    ${dataValue}
+  `);
+  const onClick = () => {
+    setDataValue(query);
+  };
 
   return (
     <div className={styles.main}>
@@ -54,7 +54,7 @@ export const Main = () => {
         className={styles.play}
         src={loading ? './stop-button.svg' : './play-button.svg'}
         alt="play"
-        onClick={() => {}}
+        onClick={onClick}
       />
     </div>
   );
