@@ -16,14 +16,16 @@
 .schema {
   position: absolute;
   height: 100%;
-  width: 200px;
+  width: 25%;
   background-color: lightgrey;
   border-left: 5px solid green;
   right: 0;
   transform: translateX(100%);
   transition: 0.3s;
+  overflow-y: scroll;
+  overflow-x: scroll;
 }
 
 .opened {
-  right: 200px;
+  right: 25%;
 }
