@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { Dispatch, FC, SetStateAction } from 'react';
 import { Box, List, ListItem, ListItemButton, Typography } from '@mui/material';
 
 export interface IQuery {
@@ -24,18 +24,17 @@ interface IField {
 interface IProps {
   title: string;
   fields: IQuery[];
+  setNavigation: Dispatch<SetStateAction<string[]>>;
 }
 
-export const SchemaList: FC<IProps> = ({ title, fields }) => {
-  const [type, setType] = useState('');
-
+export const SchemaList: FC<IProps> = ({ title, fields, setNavigation }) => {
   const handleClick = (currentType: string) => {
-    setType(currentType);
+    setNavigation((prev) => [...prev, currentType]);
   };
 
   return (
     <Box>
-      <Typography variant="h4">{title}</Typography>
+      <Typography variant="h5">{title}</Typography>
       <List>
         {fields.map((item) => (
           <ListItem

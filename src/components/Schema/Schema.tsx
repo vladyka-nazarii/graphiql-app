@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useQuery } from '@apollo/client';
+import { CircularProgress } from '@mui/material';
 
 import { GET_SCHEMA } from '../../apollo/gql';
-import { CircularProgress } from '@mui/material';
 import { SchemaContent } from './SchemaContent/SchemaContent';
 
 import styles from './Schema.module.scss';
@@ -17,9 +17,9 @@ export const Schema = () => {
 
   return (
     <aside>
-      <h3 className={`${styles.button} ${open && styles.opened}`} onClick={handleOpen}>
+      <h1 className={`${styles.button} ${open && styles.opened}`} onClick={handleOpen}>
         SCHEMA
-      </h3>
+      </h1>
       <section className={`${styles.schema} ${open && styles.opened}`}>
         {(loading && <CircularProgress />) || (error && error.message) || (
           <SchemaContent
