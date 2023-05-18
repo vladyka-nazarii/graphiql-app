@@ -11,10 +11,11 @@ import { QUERY_EXAMPLE } from '../../apollo/queryExample';
 export const Main = () => {
   const [query, setQuery] = useState(QUERY_EXAMPLE);
   const [dataValue, setDataValue] = useState(query);
-  const { loading, data } = useResponse(dataValue);
+  const { loadData, loading, data } = useResponse(dataValue);
 
   const onClick = () => {
     setDataValue(query);
+    loadData();
   };
 
   return (
