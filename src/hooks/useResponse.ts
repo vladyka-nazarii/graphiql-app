@@ -14,12 +14,12 @@ export const useResponse = (dataValue: string) => {
     }
   }, [dataValue, validation]);
 
-  const [loadData, { called, loading, data, error }] = useLazyQuery(
+  const [loadData, { loading, data, error }] = useLazyQuery(
     gql`
       ${query}
     `,
   );
-  console.log(called);
+
   if (!dataValue) {
     return { loadData, loading, data: '' };
   }
