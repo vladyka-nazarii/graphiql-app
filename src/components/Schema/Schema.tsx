@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useLazyQuery } from '@apollo/client';
 
 import { GET_SCHEMA } from '../../apollo/schema';
@@ -14,20 +14,25 @@ export const Schema = () => {
     setOpen((prev) => !prev);
   };
 
+  const content = useMemo(() => {
+    if (!called) {
+      return '';
+    }
+    if (loading) {
+      return 'Loading...';
+    }
+    if (error) {
+      return error.message;
+    }
+    return JSON.stringify(data, null, '\t');
+  }, [called, data, error, loading]);
+
   return (
     <>
       <div className={`${styles.button} ${open && styles.opened}`} onClick={onClick}>
         SCHEMA
       </div>
-      <pre className={`${styles.schema} ${open && styles.opened}`}>
-        {loading
-          ? 'Loading...'
-          : !called
-          ? ''
-          : error
-          ? error.message
-          : JSON.stringify(data, null, '\t')}
-      </pre>
+      <pre className={`${styles.schema} ${open && styles.opened}`}>{content}</pre>
     </>
   );
 };
