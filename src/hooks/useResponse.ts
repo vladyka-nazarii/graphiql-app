@@ -14,13 +14,13 @@ export const useResponse = (dataValue: string) => {
     }
   }, [dataValue, validation]);
 
-  const [loadData, { loading, data, error }] = useLazyQuery(
+  const [loadData, { called, loading, data, error }] = useLazyQuery(
     gql`
       ${query}
     `,
   );
 
-  if (!dataValue) {
+  if (!dataValue || !called) {
     return { loadData, loading, data: '' };
   }
   if (validation === 'Error: Wrong query format!') {
@@ -39,9 +39,6 @@ export const useResponse = (dataValue: string) => {
         '\t',
       )}`,
     };
-  }
-  if (!data) {
-    return { loadData, loading, data: '' };
   }
 
   return {
