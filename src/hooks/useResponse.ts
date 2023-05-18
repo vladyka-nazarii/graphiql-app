@@ -23,9 +23,6 @@ export const useResponse = (dataValue: string) => {
   if (!dataValue) {
     return { loadData, loading, data: '' };
   }
-  if (!data) {
-    return { loadData, loading, data: '' };
-  }
   if (validation === 'Error: Wrong query format!') {
     return { loadData, loading, data: 'Error: Wrong query format!' };
   }
@@ -42,6 +39,9 @@ export const useResponse = (dataValue: string) => {
         '\t',
       )}`,
     };
+  }
+  if (!data) {
+    return { loadData, loading, data: '' };
   }
 
   return {
