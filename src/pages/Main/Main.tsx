@@ -1,20 +1,21 @@
-import { useState } from 'react';
-import CodeMirror from '@uiw/react-codemirror';
+import { useRef, useState } from 'react';
+import CodeMirror, { ReactCodeMirrorRef } from '@uiw/react-codemirror';
 
 import { Schema } from '../../components/Schema/Schema';
 import { BasicTabs } from '../../components/Tabs/Tabs';
-
-import styles from './Main.module.scss';
 import { useResponse } from '../../hooks/useResponse';
 import { QUERY_EXAMPLE } from '../../apollo/queryExample';
 
+import styles from './Main.module.scss';
+
 export const Main = () => {
   const [query, setQuery] = useState(QUERY_EXAMPLE);
-  const [dataValue, setDataValue] = useState(query);
-  const { loading, data } = useResponse(dataValue);
+  const { loadData, loading, data } = useResponse(query);
+  const queryRef = useRef<ReactCodeMirrorRef>(null);
 
   const onClick = () => {
-    setDataValue(query);
+    setQuery(queryRef.current?.editor?.textContent?.replace(/.*›/g, '') || '');
+    loadData();
   };
 
   return (
@@ -26,7 +27,7 @@ export const Main = () => {
           width="50vw"
           editable={true}
           theme="light"
-          onChange={(value: string) => setQuery(value)}
+          ref={queryRef}
         />
         <BasicTabs />
       </div>

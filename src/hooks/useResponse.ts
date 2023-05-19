@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useQuery, gql } from '@apollo/client';
+import { gql, ServerError, useLazyQuery } from '@apollo/client';
 
 import { QUERY_EXAMPLE } from '../apollo/queryExample';
 import { queryValidation } from '../apollo/queryValidation';
@@ -14,42 +14,36 @@ export const useResponse = (dataValue: string) => {
     }
   }, [dataValue, validation]);
 
-  const { loading, error, data } = useQuery(
+  const [loadData, { called, loading, data, error }] = useLazyQuery(
     gql`
       ${query}
     `,
   );
 
-  const correctData: typeof data = {};
-
-  const removeTypename = (sourceData: typeof data, correctData: typeof data) => {
-    if (typeof sourceData === 'object') {
-      Object.keys(sourceData).forEach((key) => {
-        if (typeof sourceData[key] === 'object') {
-          correctData[key] = {};
-          removeTypename(sourceData[key], correctData[key]);
-        } else {
-          if (key !== '__typename') {
-            correctData[key] = sourceData[key];
-          }
-        }
-      });
-    }
-  };
-
-  if (!dataValue) {
-    return { loading, data: '' };
+  if (!dataValue || !called) {
+    return { loadData, loading, data: '' };
   }
   if (validation === 'Error: Wrong query format!') {
-    return { loading, data: 'Wrong query format!' };
+    return { loadData, loading, data: 'Error: Wrong query format!' };
   }
   if (loading) {
-    return { loading, data: 'Loading...' };
+    return { loadData, loading, data: 'Loading...' };
   }
   if (error) {
-    return { loading, data: `Error: ${error.message}` };
+    return {
+      loadData,
+      loading,
+      data: `Error: ${error.message}\n${JSON.stringify(
+        (error.networkError as ServerError).result || 'Check your internet connection',
+        null,
+        '\t',
+      )}`,
+    };
   }
 
-  removeTypename(data, correctData);
-  return { loading, data: JSON.stringify(correctData, null, '\t') };
+  return {
+    loadData,
+    loading,
+    data: JSON.stringify(data, null, '\t').replace(/.*__typename.*\n/g, ''),
+  };
 };
