@@ -1,5 +1,5 @@
 import { Dispatch, FC, SetStateAction } from 'react';
-import { Breadcrumbs, Link, Typography } from '@mui/material';
+import { Breadcrumbs, Link } from '@mui/material';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 interface IProps {

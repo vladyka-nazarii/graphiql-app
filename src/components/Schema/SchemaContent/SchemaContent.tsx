@@ -31,7 +31,7 @@ export const SchemaContent: FC<IProps> = ({ queries, mutations, subscriptions })
       {type ? (
         <TypeDetails type={type} setNavigation={setNavigation} />
       ) : (
-        <>
+        <Box>
           <Stack spacing={2}>
             <SchemaList title="Queries" fields={queries} setNavigation={setNavigation} />
             <SchemaList title="Mutations" fields={mutations} setNavigation={setNavigation} />
@@ -41,7 +41,7 @@ export const SchemaContent: FC<IProps> = ({ queries, mutations, subscriptions })
               setNavigation={setNavigation}
             />
           </Stack>
-        </>
+        </Box>
       )}
     </Box>
   );

@@ -28,8 +28,10 @@ interface IProps {
 }
 
 export const SchemaList: FC<IProps> = ({ title, fields, setNavigation }) => {
-  const handleClick = (currentType: string) => {
-    setNavigation((prev) => [...prev, currentType]);
+  const handleClick = (newType: string) => {
+    if (newType) {
+      setNavigation((prev) => [...prev, newType]);
+    }
   };
 
   return (

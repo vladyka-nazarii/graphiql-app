@@ -1,6 +1,6 @@
 import { Dispatch, FC, SetStateAction } from 'react';
 import { gql, useQuery } from '@apollo/client';
-import { CircularProgress, List, ListItem, ListItemButton, Typography } from '@mui/material';
+import { Box, CircularProgress, List, ListItem, ListItemButton, Typography } from '@mui/material';
 
 interface IProps {
   type: string;
@@ -44,7 +44,9 @@ export const TypeDetails: FC<IProps> = ({ type, setNavigation }) => {
   `);
 
   const handleNavigation = (newType: string) => {
-    setNavigation((prev) => [...prev, newType]);
+    if (newType) {
+      setNavigation((prev) => [...prev, newType]);
+    }
   };
 
   const createDetails = (data: IResp) => {
@@ -52,7 +54,7 @@ export const TypeDetails: FC<IProps> = ({ type, setNavigation }) => {
     const details = data?.__type.description;
     if (fields?.length) {
       return (
-        <>
+        <Box>
           <Typography variant="h5">{type}</Typography>
           <List>
             {fields.map((item) => (
@@ -69,7 +71,7 @@ export const TypeDetails: FC<IProps> = ({ type, setNavigation }) => {
               </ListItem>
             ))}
           </List>
-        </>
+        </Box>
       );
     }
     return <div>{details}</div>;
