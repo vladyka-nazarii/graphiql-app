@@ -1,21 +1,33 @@
-import { useRef, useState } from 'react';
-import CodeMirror, { ReactCodeMirrorRef } from '@uiw/react-codemirror';
+import { FocusEventHandler, useState } from 'react';
+import CodeMirror from '@uiw/react-codemirror';
 
 import { Schema } from '../../components/Schema/Schema';
 import { BasicTabs } from '../../components/Tabs/Tabs';
 import { useResponse } from '../../hooks/useResponse';
 import { QUERY_EXAMPLE } from '../../apollo/queryExample';
+import { queryValidation } from '../../apollo/queryValidation';
+import { Message } from '../../types/enums';
 
 import styles from './Main.module.scss';
 
 export const Main = () => {
-  const [query, setQuery] = useState(QUERY_EXAMPLE);
-  const { loadData, loading, data } = useResponse(query);
-  const queryRef = useRef<ReactCodeMirrorRef>(null);
+  const [validation, setValidation] = useState(true);
+  const { setQuery, loadData, loading, data } = useResponse();
+
+  const onBlur: FocusEventHandler<HTMLDivElement> = (event) => {
+    const content = event.target.innerText || '';
+    const validate = queryValidation(content);
+
+    if (validate === Message.WrongFormat) {
+      setValidation(false);
+    } else {
+      setValidation(true);
+      setQuery(content);
+    }
+  };
 
   const onClick = () => {
-    setQuery(queryRef.current?.editor?.textContent?.replace(/.*›/g, '') || '');
-    loadData();
+    validation && loadData();
   };
 
   return (
@@ -27,12 +39,12 @@ export const Main = () => {
           width="50vw"
           editable={true}
           theme="light"
-          ref={queryRef}
+          onBlur={onBlur}
         />
         <BasicTabs />
       </div>
       <CodeMirror
-        value={data}
+        value={validation ? data : Message.WrongFormat}
         height="calc(100vh - 64px - 64px)"
         width="50vw"
         editable={false}

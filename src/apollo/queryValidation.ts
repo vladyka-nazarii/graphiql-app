@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client';
+import { Message } from '../types/enums';
 
 export const queryValidation = (query: string) => {
   try {
@@ -6,6 +7,6 @@ export const queryValidation = (query: string) => {
       ${query}
     `;
   } catch (e) {
-    return 'Error: Wrong query format!';
+    return Message.WrongFormat;
   }
 };
