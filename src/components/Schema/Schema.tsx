@@ -2,14 +2,15 @@ import { useMemo, useState } from 'react';
 import { useLazyQuery } from '@apollo/client';
 import { CircularProgress } from '@mui/material';
 
-import { GET_SCHEMA } from '../../apollo/gql';
+import { GET_TYPES } from '../../apollo/gql';
 import { SchemaContent } from './SchemaContent/SchemaContent';
+import { ISchemaType } from './documentTypes/documentTypes';
 
 import styles from './Schema.module.scss';
 
 export const Schema = () => {
   const [open, setOpen] = useState(false);
-  const [loadData, { called, loading, data, error }] = useLazyQuery(GET_SCHEMA);
+  const [loadData, { loading, data, error }] = useLazyQuery<ISchemaType>(GET_TYPES);
 
   const handleOpen = () => {
     loadData();
@@ -17,23 +18,14 @@ export const Schema = () => {
   };
 
   const content = useMemo(() => {
-    if (!called) {
-      return '';
-    }
-    if (loading) {
+    if (data) {
+      return <SchemaContent types={data.__schema.types} />;
+    } else if (loading) {
       return <CircularProgress />;
-    }
-    if (error) {
+    } else if (error) {
       return error.message;
     }
-    return (
-      <SchemaContent
-        queries={data.__schema.queryType.fields}
-        mutations={data.__schema.mutationType.fields}
-        subscriptions={data.__schema.subscriptionType.fields}
-      />
-    );
-  }, [called, data, error, loading]);
+  }, [data, loading, error]);
 
   return (
     <aside>

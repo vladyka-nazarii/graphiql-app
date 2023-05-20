@@ -1,37 +1,17 @@
 import { Dispatch, FC, SetStateAction } from 'react';
 import { Box, List, ListItem, ListItemButton, Typography } from '@mui/material';
-
-export interface IQuery {
-  name: string;
-  args: IArg[];
-  type: {
-    name: string;
-    ofType: null | {
-      name: string;
-    };
-    fields: null | IField[];
-  };
-}
-
-interface IArg {
-  name: string;
-}
-
-interface IField {
-  name: string;
-}
+import { IGraphQLField } from '../../../documentTypes/documentTypes';
+import { IField } from '../../SchemaContent';
 
 interface IProps {
   title: string;
-  fields: IQuery[];
-  setNavigation: Dispatch<SetStateAction<string[]>>;
+  fields: IGraphQLField[];
+  setField: Dispatch<SetStateAction<IField>>;
 }
 
-export const SchemaList: FC<IProps> = ({ title, fields, setNavigation }) => {
-  const handleClick = (newType: string) => {
-    if (newType) {
-      setNavigation((prev) => [...prev, newType]);
-    }
+export const FieldsList: FC<IProps> = ({ title, fields, setField }) => {
+  const handleClick = (fieldName: string, fieldType: string) => {
+    setField({ name: fieldName, type: fieldType });
   };
 
   return (
@@ -42,7 +22,7 @@ export const SchemaList: FC<IProps> = ({ title, fields, setNavigation }) => {
           <ListItem
             disablePadding
             key={item.name}
-            onClick={() => handleClick(item.type.ofType?.name || item.type.name)}
+            onClick={() => handleClick(item.name, item.type.name || item.type.ofType.name)}
           >
             <ListItemButton sx={{ display: 'flex', columnGap: '5px' }}>
               <Typography>{item.name}:</Typography>

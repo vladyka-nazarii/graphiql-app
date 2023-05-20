@@ -1,48 +1,61 @@
-import { FC, useEffect, useState } from 'react';
-import { Box, Stack } from '@mui/material';
+import { FC, useEffect, useMemo, useState } from 'react';
+import { Box } from '@mui/material';
 
-import { IQuery, SchemaList } from './SchemaList/SchemaList';
-import { TypeDetails } from './TypeDetails/TypeDetails';
 import { SchemaBreadcrumbs } from './SchemaBreadcrumbs/SchemaBreadcrumbs';
+import { IGraphQLType } from '../documentTypes/documentTypes';
+import { MainFields } from './MainFields/MainFields';
+import { FieldDetails } from './FieldDetails/FieldDetails';
 
+export interface IField {
+  name: string | null;
+  type: string | null;
+}
 interface IProps {
-  queries: IQuery[];
-  mutations: IQuery[];
-  subscriptions: IQuery[];
+  types: IGraphQLType[];
 }
 
-export const SchemaContent: FC<IProps> = ({ queries, mutations, subscriptions }) => {
-  const [type, setType] = useState('');
+export const SchemaContent: FC<IProps> = ({ types }) => {
+  const [field, setField] = useState<IField>({ name: null, type: null });
   const [navigation, setNavigation] = useState(['Schema']);
 
   useEffect(() => {
-    if (navigation.length > 1) {
-      setType(navigation[navigation.length - 1]);
-    } else {
-      setType('');
+    if (field.name) {
+      const name = field.name;
+      setNavigation((prev) => [...prev, name]);
+    }
+  }, [field]);
+
+  useEffect(() => {
+    if (navigation.length === 1) {
+      setField({ name: null, type: null });
     }
   }, [navigation]);
 
+  const fieldSections = useMemo(
+    () =>
+      types.filter(
+        (item) => item.name === 'Query' || item.name === 'Mutation' || item.name === 'Subscription',
+      ),
+    [types],
+  );
+
+  const currentField = useMemo(() => {
+    const fields = fieldSections.map((item) => item.fields).flat();
+    const fieldName = fields.find((item) => item.name === field.name);
+    return fieldName;
+  }, [fieldSections, field.name]);
+
+  const currentType = useMemo(() => {
+    const fieldType = types.find((item) => item.name === field.type);
+    return fieldType;
+  }, [field.type, types]);
+
   return (
     <Box>
-      <Box marginBottom={'10px'}>
-        <SchemaBreadcrumbs navigation={navigation} setNavigation={setNavigation} />
-      </Box>
-      {type ? (
-        <TypeDetails type={type} setNavigation={setNavigation} />
-      ) : (
-        <Box>
-          <Stack spacing={2}>
-            <SchemaList title="Queries" fields={queries} setNavigation={setNavigation} />
-            <SchemaList title="Mutations" fields={mutations} setNavigation={setNavigation} />
-            <SchemaList
-              title="Subscriptions"
-              fields={subscriptions}
-              setNavigation={setNavigation}
-            />
-          </Stack>
-        </Box>
-      )}
+      <SchemaBreadcrumbs navigation={navigation} setNavigation={setNavigation} />
+      {(currentType && (
+        <FieldDetails field={currentField} type={currentType} setField={setField} />
+      )) || <MainFields fields={fieldSections} setField={setField} />}
     </Box>
   );
 };

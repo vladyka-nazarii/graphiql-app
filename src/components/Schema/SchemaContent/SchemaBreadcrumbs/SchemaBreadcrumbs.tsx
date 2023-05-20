@@ -1,5 +1,5 @@
 import { Dispatch, FC, SetStateAction } from 'react';
-import { Breadcrumbs, Link } from '@mui/material';
+import { Box, Breadcrumbs, Link } from '@mui/material';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 interface IProps {
@@ -15,24 +15,26 @@ export const SchemaBreadcrumbs: FC<IProps> = ({ navigation, setNavigation }) => 
   };
 
   return (
-    <Breadcrumbs aria-label="breadcrumb" separator={<NavigateNextIcon fontSize="small" />}>
-      {navigation.map((item) => {
-        const isCurrentRoute = navigation[navigation.length - 1] === item;
-        return (
-          <Link
-            key={item}
-            color="text.primary"
-            underline={isCurrentRoute ? 'none' : 'hover'}
-            sx={{
-              cursor: isCurrentRoute ? 'default' : 'pointer',
-              fontWeight: isCurrentRoute ? '900' : '',
-            }}
-            onClick={() => handleNavigation(item)}
-          >
-            {item}
-          </Link>
-        );
-      })}
-    </Breadcrumbs>
+    <Box marginBottom={'10px'}>
+      <Breadcrumbs aria-label="breadcrumb" separator={<NavigateNextIcon fontSize="small" />}>
+        {navigation.map((item) => {
+          const isCurrentRoute = navigation[navigation.length - 1] === item;
+          return (
+            <Link
+              key={item}
+              color="text.primary"
+              underline={isCurrentRoute ? 'none' : 'hover'}
+              sx={{
+                cursor: isCurrentRoute ? 'default' : 'pointer',
+                fontWeight: isCurrentRoute ? '900' : '',
+              }}
+              onClick={() => handleNavigation(item)}
+            >
+              {item}
+            </Link>
+          );
+        })}
+      </Breadcrumbs>
+    </Box>
   );
 };
