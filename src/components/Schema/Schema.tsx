@@ -21,7 +21,7 @@ export const Schema = () => {
     if (data) {
       return <SchemaContent types={data.__schema.types} />;
     } else if (loading) {
-      return <CircularProgress />;
+      return <CircularProgress className={styles.loading} />;
     } else if (error) {
       return error.message;
     }

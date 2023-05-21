@@ -9,6 +9,7 @@ export interface IGraphQLType {
   description: string | null;
   kind: string;
   fields: IGraphQLField[];
+  inputFields: IGraphQLField[];
 }
 
 export interface IGraphQLField {

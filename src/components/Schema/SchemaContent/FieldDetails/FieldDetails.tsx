@@ -6,16 +6,19 @@ import { IField } from '../SchemaContent';
 interface IProps {
   field?: IGraphQLField;
   type: IGraphQLType;
-  setField: Dispatch<SetStateAction<IField>>;
+  setFields: Dispatch<SetStateAction<IField[]>>;
 }
 
-export const FieldDetails: FC<IProps> = ({ field, type, setField }) => {
-  const typeFields = type.fields;
+export const FieldDetails: FC<IProps> = ({ field, type, setFields }) => {
+  const typeFields = type.fields || type.inputFields;
   const typeDescription = type.description;
   const typeKind = type.kind;
 
   const handleClick = (item: IGraphQLArgument) => {
-    setField({ name: item.name, type: item.type.name || item.type.ofType?.name });
+    setFields((prev) => [
+      ...prev,
+      { name: item.name, type: item.type.name || item.type.ofType?.name },
+    ]);
   };
 
   return (
@@ -63,7 +66,7 @@ export const FieldDetails: FC<IProps> = ({ field, type, setField }) => {
       {(typeDescription || typeKind) && (
         <Box>
           <Typography variant="h5" mb={'10px'}>
-            Type Details
+            Description
           </Typography>
           <Typography variant="body1" mb={'10px'}>
             {typeDescription}

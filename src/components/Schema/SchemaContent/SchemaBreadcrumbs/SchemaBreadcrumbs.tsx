@@ -1,17 +1,19 @@
-import { Dispatch, FC, SetStateAction } from 'react';
+import { Dispatch, FC, SetStateAction, useMemo } from 'react';
 import { Box, Breadcrumbs, Link } from '@mui/material';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import { IField } from '../SchemaContent';
 
 interface IProps {
-  navigation: string[];
-  setNavigation: Dispatch<SetStateAction<string[]>>;
+  fields: IField[];
+  setFields: Dispatch<SetStateAction<IField[]>>;
 }
 
-export const SchemaBreadcrumbs: FC<IProps> = ({ navigation, setNavigation }) => {
+export const SchemaBreadcrumbs: FC<IProps> = ({ fields, setFields }) => {
+  const navigation = useMemo(() => ['Schema', ...fields.map((item) => item.name)], [fields]);
+
   const handleNavigation = (typeName: string) => {
-    const typeNameIndex = navigation.indexOf(typeName);
-    const newNavigation = navigation.slice(0, typeNameIndex + 1);
-    setNavigation(newNavigation);
+    const typeNameIndex = navigation.indexOf(typeName) - 1;
+    setFields((prev) => prev.slice(0, typeNameIndex + 1));
   };
 
   return (

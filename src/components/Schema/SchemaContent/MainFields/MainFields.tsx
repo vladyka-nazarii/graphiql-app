@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction, useMemo } from 'react';
+import { Dispatch, FC, SetStateAction } from 'react';
 import { Box, Stack } from '@mui/material';
 
 import { FieldsList } from './FiledsList/FieldsList';
@@ -7,15 +7,20 @@ import { IField } from '../SchemaContent';
 
 interface IProps {
   fields: IGraphQLType[];
-  setField: Dispatch<SetStateAction<IField>>;
+  setFields: Dispatch<SetStateAction<IField[]>>;
 }
 
-export const MainFields: FC<IProps> = ({ fields, setField }) => {
+export const MainFields: FC<IProps> = ({ fields, setFields }) => {
   return (
     <Box>
       <Stack spacing={2}>
         {fields.map((item) => (
-          <FieldsList key={item.name} title={item.name} fields={item.fields} setField={setField} />
+          <FieldsList
+            key={item.name}
+            title={item.name}
+            fields={item.fields}
+            setFields={setFields}
+          />
         ))}
       </Stack>
     </Box>

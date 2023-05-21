@@ -29,62 +29,9 @@ export const GET_TYPES = gql`
             }
           }
         }
-      }
-    }
-  }
-`;
-
-export const GET_SCHEMA = gql`
-  query Schema {
-    __schema {
-      queryType {
-        fields {
+        inputFields {
           name
           type {
-            name
-            ofType {
-              name
-            }
-            fields {
-              name
-            }
-          }
-          args {
-            name
-          }
-        }
-      }
-      mutationType {
-        fields {
-          name
-          type {
-            name
-            ofType {
-              name
-            }
-            fields {
-              name
-            }
-          }
-
-          args {
-            name
-          }
-        }
-      }
-      subscriptionType {
-        fields {
-          name
-          type {
-            name
-            ofType {
-              name
-            }
-            fields {
-              name
-            }
-          }
-          args {
             name
           }
         }

@@ -6,12 +6,12 @@ import { IField } from '../../SchemaContent';
 interface IProps {
   title: string;
   fields: IGraphQLField[];
-  setField: Dispatch<SetStateAction<IField>>;
+  setFields: Dispatch<SetStateAction<IField[]>>;
 }
 
-export const FieldsList: FC<IProps> = ({ title, fields, setField }) => {
+export const FieldsList: FC<IProps> = ({ title, fields, setFields }) => {
   const handleClick = (fieldName: string, fieldType: string) => {
-    setField({ name: fieldName, type: fieldType });
+    setFields((prev) => [...prev, { name: fieldName, type: fieldType }]);
   };
 
   return (
