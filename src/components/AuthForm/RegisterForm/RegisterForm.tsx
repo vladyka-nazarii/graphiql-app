@@ -10,7 +10,6 @@ import { validationSignUp } from '../../../utils/validation-schema';
 import { Link } from 'react-router-dom';
 import { enqueueSnackbar } from 'notistack';
 import { CustomTextInput } from '../Inputs/CustomTextInput/CustomTextInput';
-import { PasswordInput } from '../Inputs/PasswordInput/PasswordInput';
 import { ILogin } from '../LoginForm/LoginForm';
 
 export interface IRegister extends ILogin {

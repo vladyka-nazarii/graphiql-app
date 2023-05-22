@@ -9,7 +9,6 @@ import { useAppDispatch } from '../../../hooks/redux-hooks';
 import { setUser } from '../../../redux/slices/userSlice';
 import { validationSignIn } from '../../../utils/validation-schema';
 import { enqueueSnackbar } from 'notistack';
-import { PasswordInput } from '../Inputs/PasswordInput/PasswordInput';
 import { CustomTextInput } from '../Inputs/CustomTextInput/CustomTextInput';
 
 export interface ILogin {
