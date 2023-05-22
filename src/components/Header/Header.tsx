@@ -1,17 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppBar, Button, ButtonGroup, Container, Toolbar, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 import { useAuth } from '../../hooks/useAuth';
 import { signOutUser } from '../../firebase/sign-out-user';
 import { useAppDispatch } from '../../hooks/redux-hooks';
 import { removeUser } from '../../redux/slices/userSlice';
+import { Languages } from '../Languages/Languages';
 
 export const Header = () => {
   const { isAuth } = useAuth();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
+  const { t } = useTranslation();
 
   const signOutHandler = async () => {
     await signOutUser();
@@ -42,27 +45,31 @@ export const Header = () => {
     >
       <Container>
         <Toolbar sx={{ justifyContent: 'space-between' }}>
-          <Typography variant="h6">GraphQl Playground</Typography>
+          <Typography variant="h6">{t('GraphQL Playground')}</Typography>
           <ButtonGroup variant="text">
             {isAuth ? (
               <>
                 <Button color="inherit" onClick={() => navigate('/')}>
-                  Go to the Main Page
+                  {t('Main Page')}
                 </Button>
                 <Button color="inherit" onClick={signOutHandler}>
-                  Sign Out
+                  {t('Sign Out')}
                 </Button>
               </>
             ) : (
               <>
                 <Button color="inherit" onClick={() => navigate('/login')}>
-                  Login
+                  {t('Login')}
                 </Button>
                 <Button color="inherit" onClick={() => navigate('/register')}>
-                  Register
+                  {t('Register')}
                 </Button>
               </>
             )}
+            <Button color="inherit" onClick={() => navigate('/welcome')}>
+              {t('About')}
+            </Button>
+            <Languages />
           </ButtonGroup>
         </Toolbar>
       </Container>

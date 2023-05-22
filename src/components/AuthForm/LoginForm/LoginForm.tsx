@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { FormikProvider, useFormik } from 'formik';
 import { Button, CircularProgress, Stack, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { signInUser } from '../../../firebase/sign-in-user';
 import { useAppDispatch } from '../../../hooks/redux-hooks';
@@ -19,6 +20,7 @@ export interface ILogin {
 export const LoginForm = () => {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
+  const { t } = useTranslation();
   const formik = useFormik<ILogin>({
     initialValues: {
       email: '',
@@ -56,7 +58,7 @@ export const LoginForm = () => {
         <form onSubmit={handleSubmit}>
           <Stack spacing={2} padding={'20px'} width={'300px'}>
             <Typography variant="h4" gutterBottom align="center">
-              Sign In
+              {t('Sign In')}
             </Typography>
             <Stack spacing={0.5}>
               <CustomTextInput name="email" title="Email" />
@@ -64,10 +66,10 @@ export const LoginForm = () => {
             </Stack>
             <Stack spacing={0.5}>
               <Button color="primary" variant="contained" fullWidth type="submit">
-                Sign In
+                {t('Sign In')}
               </Button>
               <Typography variant="subtitle1" gutterBottom>
-                or you can <Link to="/register">create new account</Link>
+                {t('Or you can')} <Link to="/register">{t('create new account')}</Link>
               </Typography>
             </Stack>
           </Stack>

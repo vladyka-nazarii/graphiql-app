@@ -1,5 +1,6 @@
 import { FocusEventHandler, useState } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
+import { useTranslation } from 'react-i18next';
 
 import { Schema } from '../../components/Schema/Schema';
 import { BasicTabs } from '../../components/Tabs/Tabs';
@@ -13,6 +14,7 @@ import styles from './Main.module.scss';
 export const Main = () => {
   const [validation, setValidation] = useState(true);
   const { setQuery, loadData, loading, data } = useResponse();
+  const { t } = useTranslation();
 
   const onBlur: FocusEventHandler<HTMLDivElement> = (event) => {
     const content = event.target.innerText || '';
@@ -44,7 +46,7 @@ export const Main = () => {
         <BasicTabs />
       </div>
       <CodeMirror
-        value={validation ? data : Message.WrongFormat}
+        value={validation ? data : t(Message.WrongFormat) || ''}
         height="calc(100vh - 64px - 64px)"
         width="50vw"
         editable={false}

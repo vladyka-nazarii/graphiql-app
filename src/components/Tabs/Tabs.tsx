@@ -3,11 +3,13 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import CodeMirror from '@uiw/react-codemirror';
+import { useTranslation } from 'react-i18next';
 
 import { TabPanel } from './TabPanel';
 
 export const BasicTabs = () => {
   const [value, setValue] = useState(0);
+  const { t } = useTranslation();
 
   function a11yProps(index: number) {
     return {
@@ -24,8 +26,8 @@ export const BasicTabs = () => {
     <Box sx={{ width: '100%', height: '25%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="QUERY VARIABLES" {...a11yProps(0)} />
-          <Tab label="HTTP HEADERS" {...a11yProps(1)} />
+          <Tab label={t('QUERY VARIABLES')} {...a11yProps(0)} />
+          <Tab label={t('HTTP HEADERS')} {...a11yProps(1)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { FormikProvider, useFormik } from 'formik';
 import { Button, CircularProgress, Stack, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 import { useAppDispatch } from '../../../hooks/redux-hooks';
 import { setUser } from '../../../redux/slices/userSlice';
@@ -19,7 +20,7 @@ export interface IRegister extends ILogin {
 export const RegisterForm = () => {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
-
+  const { t } = useTranslation();
   const formik = useFormik<IRegister>({
     initialValues: {
       email: '',
@@ -57,19 +58,20 @@ export const RegisterForm = () => {
         <form onSubmit={handleSubmit}>
           <Stack spacing={2} padding={'20px'} width={'300px'}>
             <Typography variant="h4" gutterBottom align="center">
-              Sign Up
+              {t('Sign Up')}
             </Typography>
             <Stack spacing={0.5}>
-              <CustomTextInput name="email" title="Email" />
+              <CustomTextInput name="ttyty" title="fghjfghjfghj" />
               <PasswordInput />
               <CustomTextInput name="confirmPassword" title="Confirm password" type="password" />
             </Stack>
             <Stack spacing={0.5}>
               <Button color="primary" variant="contained" fullWidth type="submit">
-                Sign Up
+                {t('Sign Up')}
               </Button>
               <Typography variant="subtitle1" gutterBottom>
-                if you <Link to="/login">already have account</Link>
+                {t('You ')}
+                <Link to="/login">{t('already have account')}</Link>
               </Typography>
             </Stack>
           </Stack>

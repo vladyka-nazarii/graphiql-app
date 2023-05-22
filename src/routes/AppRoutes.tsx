@@ -12,7 +12,7 @@ export const AppRoutes = () => {
 
   return (
     <Routes>
-      <Route path="/" element={isAuth ? <Main /> : <Navigate to="login" replace />} />
+      <Route path="/" element={isAuth ? <Main /> : <Navigate to="welcome" replace />} />
       <Route path="/welcome" element={<Welcome />} />
       <Route path="/login" element={isAuth ? <Navigate to="/" replace /> : <Login />} />
       <Route path="/register" element={isAuth ? <Navigate to="/" replace /> : <Register />} />
