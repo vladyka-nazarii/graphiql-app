@@ -1,5 +1,5 @@
 import { FC, useMemo, useState } from 'react';
-import { Box } from '@mui/material';
+import { Box, TextField } from '@mui/material';
 
 import { SchemaBreadcrumbs } from './SchemaBreadcrumbs/SchemaBreadcrumbs';
 import { IGraphQLType } from '../documentTypes/documentTypes';
@@ -16,6 +16,7 @@ interface IProps {
 
 export const SchemaContent: FC<IProps> = ({ types }) => {
   const [fields, setFields] = useState<IField[]>([]);
+  const [search, setSearch] = useState<string>('');
 
   const field = useMemo(() => fields[fields.length - 1], [fields]);
 
@@ -26,6 +27,17 @@ export const SchemaContent: FC<IProps> = ({ types }) => {
       ),
     [types],
   );
+
+  const filteredFieldSections = useMemo(() => {
+    const pattern = new RegExp(search, 'ig');
+    const filteredFields = fieldSections.map((item) => {
+      return {
+        ...item,
+        fields: item.fields.filter((field) => field.name.match(pattern)),
+      };
+    });
+    return filteredFields;
+  }, [search, fieldSections]);
 
   const currentField = useMemo(() => {
     if (field) {
@@ -44,10 +56,25 @@ export const SchemaContent: FC<IProps> = ({ types }) => {
 
   return (
     <Box>
-      <SchemaBreadcrumbs fields={fields} setFields={setFields} />
-      {(currentType && (
-        <FieldDetails field={currentField} type={currentType} setFields={setFields} />
-      )) || <MainFields fields={fieldSections} setFields={setFields} />}
+      {currentType ? (
+        <>
+          <SchemaBreadcrumbs fields={fields} setFields={setFields} />
+          <FieldDetails field={currentField} type={currentType} setFields={setFields} />
+        </>
+      ) : (
+        <>
+          <TextField
+            id="outlined-basic"
+            label="Search field"
+            variant="outlined"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            fullWidth={true}
+            sx={{ margin: '10px 0' }}
+          />
+          <MainFields fields={filteredFieldSections} setFields={setFields} />
+        </>
+      )}
     </Box>
   );
 };
