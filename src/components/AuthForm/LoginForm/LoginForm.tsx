@@ -61,8 +61,8 @@ export const LoginForm = () => {
               {t('Sign In')}
             </Typography>
             <Stack spacing={0.5}>
-              <CustomTextInput name="email" title="Email" />
-              <PasswordInput />
+              <CustomTextInput name="email" title={t('Email')} />
+              <CustomTextInput name="password" title={t('Password')} type="password" />
             </Stack>
             <Stack spacing={0.5}>
               <Button color="primary" variant="contained" fullWidth type="submit">

@@ -61,9 +61,13 @@ export const RegisterForm = () => {
               {t('Sign Up')}
             </Typography>
             <Stack spacing={0.5}>
-              <CustomTextInput name="ttyty" title="fghjfghjfghj" />
-              <PasswordInput />
-              <CustomTextInput name="confirmPassword" title="Confirm password" type="password" />
+              <CustomTextInput name="email" title={t('Email')} />
+              <CustomTextInput name="password" title={t('Password')} type="password" />
+              <CustomTextInput
+                name="confirmPassword"
+                title={t('Confirm password')}
+                type="password"
+              />
             </Stack>
             <Stack spacing={0.5}>
               <Button color="primary" variant="contained" fullWidth type="submit">
