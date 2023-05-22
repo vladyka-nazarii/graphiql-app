@@ -8,6 +8,8 @@ import { useResponse } from '../../hooks/useResponse';
 import { QUERY_EXAMPLE } from '../../apollo/queryExample';
 import { queryValidation } from '../../apollo/queryValidation';
 import { Message } from '../../types/enums';
+import { useAppSelector } from '../../hooks/redux-hooks';
+import { RequestButton } from '../../components/RequestButton/RequestButton';
 
 import styles from './Main.module.scss';
 
@@ -15,6 +17,7 @@ export const Main = () => {
   const [validation, setValidation] = useState(true);
   const { setQuery, loadData, loading, data } = useResponse();
   const { t } = useTranslation();
+  const { darkTheme } = useAppSelector((state) => state.theme);
 
   const onBlur: FocusEventHandler<HTMLDivElement> = (event) => {
     const content = event.target.innerText || '';
@@ -40,7 +43,7 @@ export const Main = () => {
           height="100%"
           width="50vw"
           editable={true}
-          theme="light"
+          theme={darkTheme ? 'dark' : 'light'}
           onBlur={onBlur}
         />
         <BasicTabs />
@@ -50,15 +53,10 @@ export const Main = () => {
         height="calc(100vh - 64px - 64px)"
         width="50vw"
         editable={false}
-        theme="light"
+        theme={darkTheme ? 'dark' : 'light'}
       />
       <Schema />
-      <img
-        className={styles.play}
-        src={loading ? './stop-button.svg' : './play-button.svg'}
-        alt="play"
-        onClick={onClick}
-      />
+      <RequestButton onClick={onClick} loading={loading} />
     </div>
   );
 };

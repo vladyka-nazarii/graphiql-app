@@ -6,10 +6,12 @@ import CodeMirror from '@uiw/react-codemirror';
 import { useTranslation } from 'react-i18next';
 
 import { TabPanel } from './TabPanel';
+import { useAppSelector } from '../../hooks/redux-hooks';
 
 export const BasicTabs = () => {
   const [value, setValue] = useState(0);
   const { t } = useTranslation();
+  const { darkTheme } = useAppSelector((state) => state.theme);
 
   function a11yProps(index: number) {
     return {
@@ -36,7 +38,7 @@ export const BasicTabs = () => {
           height="100%"
           width="100%"
           editable={true}
-          theme="light"
+          theme={darkTheme ? 'dark' : 'light'}
         />
       </TabPanel>
       <TabPanel value={value} index={1}>
@@ -45,7 +47,7 @@ export const BasicTabs = () => {
           height="100%"
           width="100%"
           editable={true}
-          theme="light"
+          theme={darkTheme ? 'dark' : 'light'}
         />
       </TabPanel>
     </Box>
