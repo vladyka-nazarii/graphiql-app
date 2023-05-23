@@ -44,6 +44,7 @@ export function useFragment<TType>(
 export function makeFragmentData<
   F extends DocumentTypeDecoration<any, any>,
   FT extends ResultOf<F>,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
 >(data: FT, _fragment: F): FragmentType<F> {
   return data as FragmentType<F>;
 }
