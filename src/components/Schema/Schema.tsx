@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useLazyQuery } from '@apollo/client';
-import { CircularProgress } from '@mui/material';
+import { CircularProgress, Typography } from '@mui/material';
 
 import { GET_TYPES } from '../../apollo/gql';
 import { SchemaContent } from './SchemaContent/SchemaContent';
@@ -29,9 +29,13 @@ export const Schema = () => {
 
   return (
     <aside>
-      <h1 className={`${styles.button} ${open && styles.opened}`} onClick={handleOpen}>
+      <Typography
+        variant="body1"
+        className={`${styles.button} ${open && styles.opened}`}
+        onClick={handleOpen}
+      >
         SCHEMA
-      </h1>
+      </Typography>
       <section className={`${styles.schema} ${open && styles.opened}`}>{content}</section>
     </aside>
   );
