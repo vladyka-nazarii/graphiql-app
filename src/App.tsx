@@ -1,4 +1,4 @@
-import { CircularProgress, ThemeProvider, createTheme } from '@mui/material/';
+import { CircularProgress, CssBaseline, ThemeProvider, createTheme } from '@mui/material/';
 
 import { Header } from './components/Header/Header';
 import { Footer } from './components/Footer/Footer';
@@ -18,6 +18,7 @@ export const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <Header />
       <main>{(loading && <CircularProgress />) || <AppRoutes />}</main>
       <Footer />

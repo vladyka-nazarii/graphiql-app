@@ -7,7 +7,7 @@ import { BasicTabs } from '../../components/Tabs/Tabs';
 import { useResponse } from '../../hooks/useResponse';
 import { QUERY_EXAMPLE } from '../../apollo/queryExample';
 import { queryValidation } from '../../apollo/queryValidation';
-import { RequestButton } from '../../components/RequestButton/RequestButton';
+import { RequestButton } from '../../components/UI/RequestButton/RequestButton';
 import { useAppSelector } from '../../hooks/redux-hooks';
 import { Message } from '../../types/enums';
 

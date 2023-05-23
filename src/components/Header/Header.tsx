@@ -1,14 +1,6 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  AppBar,
-  Button,
-  ButtonGroup,
-  Container,
-  Toolbar,
-  Typography,
-  createTheme,
-} from '@mui/material';
+import { AppBar, Button, Container, Stack, Toolbar, Typography, createTheme } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 import { useAuth } from '../../hooks/useAuth';
@@ -18,6 +10,7 @@ import { removeUser } from '../../redux/slices/userSlice';
 import { Languages } from '../Languages/Languages';
 import { ThemeSwitcher } from '../ThemeSwitcher/ThemeSwitcher';
 import { setTheme } from '../../redux/slices/themeSlice';
+import { SpaceX } from '../UI/SpaceX/SpaceX';
 
 export const Header = () => {
   const { isAuth } = useAuth();
@@ -40,6 +33,7 @@ export const Header = () => {
 
   const changeTheme = (_: ChangeEvent<HTMLInputElement>, checked: boolean) => {
     dispatch(setTheme({ darkTheme: checked }));
+    localStorage.setItem('darkTheme', JSON.stringify(checked));
   };
 
   useEffect(() => {
@@ -62,13 +56,17 @@ export const Header = () => {
   return (
     <AppBar
       color={isScrolled ? 'secondary' : 'primary'}
+      enableColorOnDark={isScrolled}
       sx={{ transition: 'all 0.6s', position: 'sticky', top: '0' }}
     >
       <Container>
         <Toolbar sx={{ justifyContent: 'space-between' }}>
-          <Typography variant="h6">{t('GraphQL Playground') + darkTheme}</Typography>
-          <ButtonGroup variant="text">
-            <ThemeSwitcher sx={{ m: 1 }} onChange={changeTheme} theme={theme} />
+          <Stack>
+            <SpaceX dark={isScrolled && darkTheme} />
+            <Typography variant="h6">{t('GraphQL Playground')}</Typography>
+          </Stack>
+          <Stack direction="row">
+            <ThemeSwitcher sx={{ m: 1 }} checked={darkTheme} onChange={changeTheme} theme={theme} />
             <Languages />
             <Button color="inherit" onClick={() => navigate('/welcome')}>
               {t('About')}
@@ -92,7 +90,7 @@ export const Header = () => {
                 </Button>
               </>
             )}
-          </ButtonGroup>
+          </Stack>
         </Toolbar>
       </Container>
     </AppBar>
