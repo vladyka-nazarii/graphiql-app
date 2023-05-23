@@ -73,8 +73,10 @@ export const RegisterForm = () => {
                 {t('Sign Up')}
               </Button>
               <Typography variant="subtitle1" gutterBottom>
-                {t('You ')}
-                <Link to="/login">{t('already have account')}</Link>
+                <Link to="/login">
+                  {t('You ')}
+                  {t('already have account')}
+                </Link>
               </Typography>
             </Stack>
           </Stack>

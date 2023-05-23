@@ -1,5 +1,5 @@
 export const RSSchool = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 552.85 198.67" height="40px" fill="#fff">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 552.85 198.67" height="35px" fill="#fff">
     <title>rs_school</title>
     <g data-name="Layer 2">
       <g data-name="Layer 1">
