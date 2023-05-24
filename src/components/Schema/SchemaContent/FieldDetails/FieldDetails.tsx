@@ -5,9 +5,9 @@ import { IField } from '../SchemaContent';
 import { FieldList } from '../FieldList/FieldList';
 
 interface IProps {
-  field?: IGraphQLField;
   type: IGraphQLType;
   setFields: Dispatch<SetStateAction<IField[]>>;
+  field?: IGraphQLField;
 }
 
 export const FieldDetails: FC<IProps> = ({ field, type, setFields }) => {

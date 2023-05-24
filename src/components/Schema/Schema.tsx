@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { useLazyQuery } from '@apollo/client';
 import { CircularProgress, Typography } from '@mui/material';
 
-import { GET_TYPES } from '../../apollo/gql';
+import { GET_TYPES } from '../../apollo/queryTypes';
 import { SchemaContent } from './SchemaContent/SchemaContent';
 import { ISchemaType } from './documentTypes/documentTypes';
 
@@ -18,12 +18,14 @@ export const Schema = () => {
   };
 
   const content = useMemo(() => {
+    if (loading) {
+      return <CircularProgress className={styles.loading} />;
+    }
+    if (error) {
+      return error.message;
+    }
     if (data) {
       return <SchemaContent types={data.__schema.types} />;
-    } else if (loading) {
-      return <CircularProgress className={styles.loading} />;
-    } else if (error) {
-      return error.message;
     }
   }, [data, loading, error]);
 
