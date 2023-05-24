@@ -5,17 +5,9 @@ import { Link, Stack, Typography } from '@mui/material';
 
 export const Footer = () => (
   <footer className={styles.footer}>
-    <Stack direction="row" gap="5px">
-      <Link href="https://github.com/vladyka-nazarii">
-        <GitHub htmlColor="#fff" fontSize="large" />
-      </Link>
-      <Link href="https://github.com/EugeneBurkovskiy">
-        <GitHub htmlColor="#fff" fontSize="large" />
-      </Link>
-      <Link href="https://github.com/MaksymKuzmych">
-        <GitHub htmlColor="#fff" fontSize="large" />
-      </Link>
-    </Stack>
+    <Link href="https://github.com/vladyka-nazarii">
+      <GitHub htmlColor="#fff" fontSize="large" />
+    </Link>
     <Typography color="white" variant="h5">
       2023
     </Typography>

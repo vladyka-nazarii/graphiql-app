@@ -8,18 +8,28 @@ import { Message } from '../types/enums';
 export const useResponse = () => {
   const [query, setQuery] = useState(QUERY_EXAMPLE);
   const { t } = useTranslation();
+  const [variables, setVariables] = useState({});
+  const [headers, setHeaders] = useState({});
   const [loadData, { loading, data, error }] = useLazyQuery(
     gql`
       ${query}
     `,
+    {
+      variables,
+      context: {
+        headers,
+      },
+    },
   );
 
   if (loading) {
-    return { setQuery, loadData, loading, data: t(Message.Loading) };
+    return { setQuery, setVariables, setHeaders, loadData, loading, data: t(Message.Loading) };
   }
   if (error) {
     return {
       setQuery,
+      setVariables,
+      setHeaders,
       loadData,
       loading,
       data: `${t('Error')}: ${
@@ -27,18 +37,20 @@ export const useResponse = () => {
           ? t(Message.ResponseNotSuccessful)
           : error.message
       }\n${JSON.stringify(
-        (error.networkError as ServerError).result || t(Message.CheckConnection),
+        (error.networkError as ServerError)?.result || t(Message.CheckConnection),
         null,
         '\t',
       )}`,
     };
   }
   if (!data) {
-    return { setQuery, loadData, loading, data: '' };
+    return { setQuery, setVariables, setHeaders, loadData, loading, data: '' };
   }
 
   return {
     setQuery,
+    setVariables,
+    setHeaders,
     loadData,
     loading,
     data: JSON.stringify(data, null, '\t').replace(/.*__typename.*\n/g, ''),

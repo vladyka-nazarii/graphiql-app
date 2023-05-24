@@ -10,29 +10,56 @@ import { queryValidation } from '../../apollo/queryValidation';
 import { RequestButton } from '../../components/UI/RequestButton/RequestButton';
 import { useAppSelector } from '../../hooks/redux-hooks';
 import { Message } from '../../types/enums';
+import { checkValidationMessage } from '../../utils/checkValidationMessage';
 
 import styles from './Main.module.scss';
 
 export const Main = () => {
-  const [validation, setValidation] = useState(true);
-  const { setQuery, loadData, loading, data } = useResponse();
+  const [validationQueryMessage, setValidationQueryMessage] = useState('');
+  const [validationVariablesMessage, setValidationVariablesMessage] = useState('');
+  const [validationHeadersMessage, setValidationHeadersMessage] = useState('');
+  const { setQuery, setVariables, setHeaders, loadData, loading, data } = useResponse();
   const { t } = useTranslation();
   const { darkTheme } = useAppSelector((state) => state.theme);
+
+  const handleVariablesValidation = (value: string) => {
+    setValidationVariablesMessage(value);
+  };
+
+  const handleHeadersValidation = (value: string) => {
+    setValidationHeadersMessage(value);
+  };
 
   const onBlur: FocusEventHandler<HTMLDivElement> = (event) => {
     const content = event.target.innerText || '';
     const validate = queryValidation(content);
 
-    if (validate === Message.WrongFormat) {
-      setValidation(false);
+    if (validate === Message.WrongQueryFormat) {
+      setValidationQueryMessage(validate);
     } else {
-      setValidation(true);
+      setValidationQueryMessage('');
       setQuery(content);
     }
   };
 
+  const handleVariables = (value: object) => {
+    setVariables(value);
+  };
+
+  const handleHeaders = (value: object) => {
+    setHeaders(value);
+  };
+
+  const validationMessage = checkValidationMessage(
+    validationQueryMessage,
+    validationVariablesMessage,
+    validationHeadersMessage,
+  );
+
   const onClick = () => {
-    validation && loadData();
+    if (!validationMessage) {
+      loadData();
+    }
   };
 
   return (
@@ -46,12 +73,17 @@ export const Main = () => {
           theme={darkTheme ? 'dark' : 'light'}
           onBlur={onBlur}
         />
-        <BasicTabs />
+        <BasicTabs
+          handleVariables={handleVariables}
+          handleHeaders={handleHeaders}
+          handleVariablesValidation={handleVariablesValidation}
+          handleHeadersValidation={handleHeadersValidation}
+        />
       </div>
       <CodeMirror
-        value={validation ? data : t(Message.WrongFormat) || ''}
+        value={!validationMessage ? data : t(validationMessage) || ''}
         height="calc(100vh - 64px - 61.5px)"
-        width="calc(50vw + 16px)"
+        width="calc(calc(50vw + 16px) + 16px)"
         editable={false}
         theme={darkTheme ? 'dark' : 'light'}
       />

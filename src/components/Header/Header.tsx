@@ -61,7 +61,7 @@ export const Header = () => {
     >
       <Container>
         <Toolbar sx={{ justifyContent: 'space-between' }}>
-          <Stack>
+          <Stack sx={{ cursor: 'pointer' }} onClick={() => navigate('/')}>
             <SpaceX dark={isScrolled && darkTheme} />
             <Typography variant="h6">{t('GraphQL Playground')}</Typography>
           </Stack>

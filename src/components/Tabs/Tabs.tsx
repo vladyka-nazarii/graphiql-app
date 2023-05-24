@@ -7,11 +7,56 @@ import { useTranslation } from 'react-i18next';
 
 import { TabPanel } from './TabPanel';
 import { useAppSelector } from '../../hooks/redux-hooks';
+import { variablesValidation } from '../../apollo/variablesValidation';
+import { Message } from '../../types/enums';
+import { headersValidation } from '../../apollo/headersValidation';
 
-export const BasicTabs = () => {
+interface BasicTabsProps {
+  handleVariables: (value: object) => void;
+  handleHeaders: (value: object) => void;
+  handleVariablesValidation: (value: string) => void;
+  handleHeadersValidation: (value: string) => void;
+}
+
+export const BasicTabs = ({
+  handleVariables,
+  handleHeaders,
+  handleVariablesValidation,
+  handleHeadersValidation,
+}: BasicTabsProps) => {
   const [value, setValue] = useState(0);
-  const { t } = useTranslation();
+  const [variablesValue, setVariablesValue] = useState('{}');
+  const [headersValue, setHeadersValue] = useState('{}');
   const { darkTheme } = useAppSelector((state) => state.theme);
+  const { t } = useTranslation();
+
+  const handleVariablesValue = (value: string) => {
+    setVariablesValue(value);
+  };
+
+  const handleHeadersValue = (value: string) => {
+    setHeadersValue(value);
+  };
+
+  const handleBlurVariables = () => {
+    const validate = variablesValidation(variablesValue);
+    if (validate === Message.WrongVariablesFormat) {
+      handleVariablesValidation(validate);
+    } else {
+      handleVariablesValidation('');
+      handleVariables(validate);
+    }
+  };
+
+  const handleBlurHeaders = () => {
+    const validate = headersValidation(headersValue);
+    if (validate === Message.WrongHeadersFormat) {
+      handleHeadersValidation(validate);
+    } else {
+      handleHeadersValidation('');
+      handleHeaders(validate);
+    }
+  };
 
   function a11yProps(index: number) {
     return {
@@ -34,20 +79,24 @@ export const BasicTabs = () => {
       </Box>
       <TabPanel value={value} index={0}>
         <CodeMirror
-          value="variable example"
+          value={variablesValue}
           height="calc(25vh - 48px)"
           width="100%"
           editable={true}
           theme={darkTheme ? 'dark' : 'light'}
+          onChange={handleVariablesValue}
+          onBlur={handleBlurVariables}
         />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <CodeMirror
-          value="header example"
+          value={headersValue}
           height="calc(25vh - 48px)"
           width="100%"
           editable={true}
           theme={darkTheme ? 'dark' : 'light'}
+          onChange={handleHeadersValue}
+          onBlur={handleBlurHeaders}
         />
       </TabPanel>
     </Box>

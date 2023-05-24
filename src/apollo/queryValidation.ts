@@ -7,6 +7,6 @@ export const queryValidation = (query: string) => {
       ${query}
     `;
   } catch (e) {
-    return Message.WrongFormat;
+    return Message.WrongQueryFormat;
   }
 };
