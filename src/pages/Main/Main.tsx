@@ -37,11 +37,11 @@ export const Main = () => {
 
   return (
     <div className={styles.main}>
-      <div className={styles.query}>
+      <div>
         <CodeMirror
           value={QUERY_EXAMPLE}
-          height="100%"
-          width="50vw"
+          height="calc(75vh - 64px - 61.5px)"
+          width="calc(50vw - 16px)"
           editable={true}
           theme={darkTheme ? 'dark' : 'light'}
           onBlur={onBlur}
@@ -50,8 +50,8 @@ export const Main = () => {
       </div>
       <CodeMirror
         value={validation ? data : t(Message.WrongFormat) || ''}
-        height="calc(100vh - 64px - 64px)"
-        width="50vw"
+        height="calc(100vh - 64px - 61.5px)"
+        width="calc(50vw + 16px)"
         editable={false}
         theme={darkTheme ? 'dark' : 'light'}
       />

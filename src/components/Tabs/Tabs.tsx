@@ -25,7 +25,7 @@ export const BasicTabs = () => {
   };
 
   return (
-    <Box sx={{ width: '100%', height: '25%' }}>
+    <Box sx={{ width: '100%', height: 'calc(25vh - 64px - 61.5px)' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab label={t('QUERY VARIABLES')} {...a11yProps(0)} />
@@ -35,7 +35,7 @@ export const BasicTabs = () => {
       <TabPanel value={value} index={0}>
         <CodeMirror
           value="variable example"
-          height="100%"
+          height="calc(25vh - 48px)"
           width="100%"
           editable={true}
           theme={darkTheme ? 'dark' : 'light'}
@@ -44,7 +44,7 @@ export const BasicTabs = () => {
       <TabPanel value={value} index={1}>
         <CodeMirror
           value="header example"
-          height="100%"
+          height="calc(25vh - 48px)"
           width="100%"
           editable={true}
           theme={darkTheme ? 'dark' : 'light'}
