@@ -1,7 +1,7 @@
 import { GitHub } from '@mui/icons-material';
 import styles from './Footer.module.css';
 import { RSSchool } from '../UI/RSSchool/RSSchool';
-import { Link, Stack, Typography } from '@mui/material';
+import { Link, Typography } from '@mui/material';
 
 export const Footer = () => (
   <footer className={styles.footer}>
