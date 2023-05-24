@@ -36,11 +36,7 @@ export const useResponse = () => {
         error.message === Message.ResponseNotSuccessful
           ? t(Message.ResponseNotSuccessful)
           : error.message
-      }\n${JSON.stringify(
-        (error.networkError as ServerError)?.result || t(Message.CheckConnection),
-        null,
-        '\t',
-      )}`,
+      }\n${JSON.stringify((error.networkError as ServerError)?.result || '', null, '\t')}`,
     };
   }
   if (!data) {
