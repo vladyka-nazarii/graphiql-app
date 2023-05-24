@@ -7,27 +7,54 @@ import { useResponse } from '../../hooks/useResponse';
 import { QUERY_EXAMPLE } from '../../apollo/queryExample';
 import { queryValidation } from '../../apollo/queryValidation';
 import { Message } from '../../types/enums';
+import { checkValidationMessage } from '../../utils/checkValidationMessage';
 
 import styles from './Main.module.scss';
 
 export const Main = () => {
-  const [validation, setValidation] = useState(true);
-  const { setQuery, loadData, loading, data } = useResponse();
+  const [validationQueryMessage, setValidationQueryMessage] = useState('');
+  const [validationVariablesMessage, setValidationVariablesMessage] = useState('');
+  const [validationHeadersMessage, setValidationHeadersMessage] = useState('');
+  const { setQuery, setVariables, setHeaders, loadData, loading, data } = useResponse();
+
+  const handleVariablesValidation = (value: string) => {
+    setValidationVariablesMessage(value);
+  };
+
+  const handleHeadersValidation = (value: string) => {
+    setValidationHeadersMessage(value);
+  };
 
   const onBlur: FocusEventHandler<HTMLDivElement> = (event) => {
     const content = event.target.innerText || '';
     const validate = queryValidation(content);
 
-    if (validate === Message.WrongFormat) {
-      setValidation(false);
+    if (validate === Message.WrongQueryFormat) {
+      setValidationQueryMessage(validate);
     } else {
-      setValidation(true);
+      setValidationQueryMessage('');
       setQuery(content);
     }
   };
 
+  const handleVariables = (value: object) => {
+    setVariables(value);
+  };
+
+  const handleHeaders = (value: object) => {
+    setHeaders(value);
+  };
+
+  const validationMessage = checkValidationMessage(
+    validationQueryMessage,
+    validationVariablesMessage,
+    validationHeadersMessage,
+  );
+
   const onClick = () => {
-    validation && loadData();
+    if (!validationMessage) {
+      loadData();
+    }
   };
 
   return (
@@ -36,17 +63,22 @@ export const Main = () => {
         <CodeMirror
           value={QUERY_EXAMPLE}
           height="100%"
-          width="50vw"
+          width="calc(50vw - 16px)"
           editable={true}
           theme="light"
           onBlur={onBlur}
         />
-        <BasicTabs />
+        <BasicTabs
+          handleVariables={handleVariables}
+          handleHeaders={handleHeaders}
+          handleVariablesValidation={handleVariablesValidation}
+          handleHeadersValidation={handleHeadersValidation}
+        />
       </div>
       <CodeMirror
-        value={validation ? data : Message.WrongFormat}
+        value={!validationMessage ? data : validationMessage}
         height="calc(100vh - 64px - 64px)"
-        width="50vw"
+        width="calc(50vw + 16px)"
         editable={false}
         theme="light"
       />

@@ -1,5 +1,7 @@
 export enum Message {
   Loading = 'Loading...',
   CheckConnection = 'Check your internet connection',
-  WrongFormat = 'Error: Wrong query format!',
+  WrongQueryFormat = 'Error: Wrong query format!',
+  WrongVariablesFormat = 'Error: Wrong variables format!',
+  WrongHeadersFormat = 'Error: Wrong headers format!',
 }
