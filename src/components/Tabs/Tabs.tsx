@@ -4,9 +4,9 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import CodeMirror from '@uiw/react-codemirror';
 import { useTranslation } from 'react-i18next';
+import { useTheme } from '@mui/material';
 
 import { TabPanel } from './TabPanel';
-import { useAppSelector } from '../../hooks/redux-hooks';
 import { variablesValidation } from '../../apollo/variablesValidation';
 import { Message } from '../../types/enums';
 import { headersValidation } from '../../apollo/headersValidation';
@@ -27,8 +27,8 @@ export const BasicTabs = ({
   const [value, setValue] = useState(0);
   const [variablesValue, setVariablesValue] = useState('{}');
   const [headersValue, setHeadersValue] = useState('{}');
-  const { darkTheme } = useAppSelector((state) => state.theme);
   const { t } = useTranslation();
+  const theme = useTheme();
 
   const handleVariablesValue = (value: string) => {
     setVariablesValue(value);
@@ -83,7 +83,7 @@ export const BasicTabs = ({
           height="calc(25vh - 48px)"
           width="100%"
           editable={true}
-          theme={darkTheme ? 'dark' : 'light'}
+          theme={theme.palette.mode}
           onChange={handleVariablesValue}
           onBlur={handleBlurVariables}
         />
@@ -94,7 +94,7 @@ export const BasicTabs = ({
           height="calc(25vh - 48px)"
           width="100%"
           editable={true}
-          theme={darkTheme ? 'dark' : 'light'}
+          theme={theme.palette.mode}
           onChange={handleHeadersValue}
           onBlur={handleBlurHeaders}
         />

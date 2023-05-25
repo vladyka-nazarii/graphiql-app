@@ -1,13 +1,13 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 import { FormikProvider, useFormik } from 'formik';
-import { Button, CircularProgress, Stack, Typography } from '@mui/material';
+import { Button, CircularProgress, Link, Stack, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 import { useAppDispatch } from '../../../hooks/redux-hooks';
 import { setUser } from '../../../redux/slices/userSlice';
 import { signUpUser } from '../../../firebase/sign-up-user';
 import { validationSignUp } from '../../../utils/validation-schema';
-import { Link } from 'react-router-dom';
 import { enqueueSnackbar } from 'notistack';
 import { CustomTextInput } from '../Inputs/CustomTextInput/CustomTextInput';
 import { ILogin } from '../LoginForm/LoginForm';
@@ -20,6 +20,7 @@ export const RegisterForm = () => {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const formik = useFormik<IRegister>({
     initialValues: {
       email: '',
@@ -73,8 +74,8 @@ export const RegisterForm = () => {
                 {t('Sign Up')}
               </Button>
               <Typography variant="subtitle1" gutterBottom>
-                <Link to="/login">
-                  {t('You ')}
+                {t('You ')}
+                <Link onClick={() => navigate('/login')} style={{ cursor: 'pointer' }}>
                   {t('already have account')}
                 </Link>
               </Typography>

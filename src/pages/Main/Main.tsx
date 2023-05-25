@@ -1,6 +1,7 @@
 import { FocusEventHandler, useState } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { useTranslation } from 'react-i18next';
+import { useTheme } from '@mui/material';
 
 import { Schema } from '../../components/Schema/Schema';
 import { BasicTabs } from '../../components/Tabs/Tabs';
@@ -8,7 +9,6 @@ import { useResponse } from '../../hooks/useResponse';
 import { QUERY_EXAMPLE } from '../../apollo/queryExample';
 import { queryValidation } from '../../apollo/queryValidation';
 import { RequestButton } from '../../components/UI/RequestButton/RequestButton';
-import { useAppSelector } from '../../hooks/redux-hooks';
 import { Message } from '../../types/enums';
 import { checkValidationMessage } from '../../utils/checkValidationMessage';
 
@@ -20,7 +20,7 @@ export const Main = () => {
   const [validationHeadersMessage, setValidationHeadersMessage] = useState('');
   const { setQuery, setVariables, setHeaders, loadData, loading, data } = useResponse();
   const { t } = useTranslation();
-  const { darkTheme } = useAppSelector((state) => state.theme);
+  const theme = useTheme();
 
   const handleVariablesValidation = (value: string) => {
     setValidationVariablesMessage(value);
@@ -63,14 +63,14 @@ export const Main = () => {
   };
 
   return (
-    <div className={styles.main}>
+    <div className={styles.main} style={{ backgroundColor: theme.palette.background.default }}>
       <div>
         <CodeMirror
           value={QUERY_EXAMPLE}
           height="calc(75vh - 64px - 61.5px)"
           width="calc(50vw - 16px)"
           editable={true}
-          theme={darkTheme ? 'dark' : 'light'}
+          theme={theme.palette.mode}
           onBlur={onBlur}
         />
         <BasicTabs
@@ -85,7 +85,7 @@ export const Main = () => {
         height="calc(100vh - 64px - 61.5px)"
         width="calc(calc(50vw + 16px) + 16px)"
         editable={false}
-        theme={darkTheme ? 'dark' : 'light'}
+        theme={theme.palette.mode}
       />
       <Schema />
       <RequestButton onClick={onClick} loading={loading} />

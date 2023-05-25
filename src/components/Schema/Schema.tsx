@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { useLazyQuery } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
-import { CircularProgress, Typography } from '@mui/material';
+import { CircularProgress, Typography, useTheme } from '@mui/material';
 
 import { GET_TYPES } from '../../apollo/queryTypes';
 import { SchemaContent } from './SchemaContent/SchemaContent';
@@ -14,6 +14,7 @@ export const Schema = () => {
   const [open, setOpen] = useState(false);
   const [loadData, { loading, data, error }] = useLazyQuery<ISchemaType>(GET_TYPES);
   const { t } = useTranslation();
+  const theme = useTheme();
 
   const handleOpen = () => {
     loadData();
@@ -43,7 +44,12 @@ export const Schema = () => {
       >
         {t('SCHEMA')}
       </Typography>
-      <section className={`${styles.schema} ${open && styles.opened}`}>{content}</section>
+      <section
+        style={{ backgroundColor: theme.palette.background.default }}
+        className={`${styles.schema} ${open && styles.opened}`}
+      >
+        {content}
+      </section>
     </aside>
   );
 };

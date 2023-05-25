@@ -1,7 +1,7 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 import { FormikProvider, useFormik } from 'formik';
-import { Button, CircularProgress, Stack, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Button, CircularProgress, Link, Stack, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 import { signInUser } from '../../../firebase/sign-in-user';
@@ -20,6 +20,7 @@ export const LoginForm = () => {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const formik = useFormik<ILogin>({
     initialValues: {
       email: '',
@@ -68,7 +69,10 @@ export const LoginForm = () => {
                 {t('Sign In')}
               </Button>
               <Typography variant="subtitle1" gutterBottom>
-                {t('Or you can')} <Link to="/register">{t('create new account')}</Link>
+                {t('Or you can')}{' '}
+                <Link onClick={() => navigate('/register')} style={{ cursor: 'pointer' }}>
+                  {t('create new account')}
+                </Link>
               </Typography>
             </Stack>
           </Stack>

@@ -24,24 +24,24 @@ export const Welcome = () => {
             'The Rolling Scopes is an independent international developer community founded in 2013. Everyone can study at RS School, regardless of age, professional employment and place of residence. Volunteer developers from various companies and countries participate in the training. These courses combine online and offline learning. School mentors teach students in their free time and for free!',
           )}
         </Typography>
-        <Typography>
+        <Typography sx={{ alignSelf: 'flex-start' }}>
           {t(
             'Students of the RS School from the 2022Q3, which has passed RS School Stage #2 as well as new students with practical experience and knowledge of',
           )}
           :
         </Typography>
-        <List>
-          <ListItem>JavaScript</ListItem>
-          <ListItem>TypeScript</ListItem>
-          <ListItem>
+        <ul className={styles.experienceList}>
+          <li>JavaScript</li>
+          <li>TypeScript</li>
+          <li>
             Git, GitHub (clone, add, commit, push, pull, merge, rebase, {t('working with')} Pull
             Request)
-          </ListItem>
-          <ListItem>NPM, Webpack</ListItem>
-          <ListItem>CSS3 / HTML5</ListItem>
-          <ListItem>Chrome DevTools, Figma</ListItem>
-          <ListItem>{t('Understanding of the')} REST</ListItem>
-        </List>
+          </li>
+          <li>NPM, Webpack</li>
+          <li>CSS3 / HTML5</li>
+          <li>Chrome DevTools, Figma</li>
+          <li>{t('Understanding of the')} REST</li>
+        </ul>
       </div>
       <div className={styles.teamInfo}>
         <div className={styles.member}>
@@ -59,7 +59,7 @@ export const Welcome = () => {
               <GitHub color="action" fontSize="medium" />
             </Link>
           </div>
-          <Typography>
+          <Typography align="center">
             {t(
               'Served as the team leader and was responsible for the basic layout of the project. As the leader, provided guidance and direction to the team while taking charge of designing and structuring the user interface.',
             )}
@@ -78,9 +78,9 @@ export const Welcome = () => {
               <GitHub color="action" fontSize="medium" />
             </Link>
           </div>
-          <Typography>
+          <Typography align="center">
             {t(
-              'Specialized in Firebase logic and authentication for the project. Was responsible for implementing Firebase functionalities, such as user authentication and data storage, to enhance the project`s security.',
+              'Firebase setup for user authentication. Development of forms, redirects and routes for registration and login. Development of documentation for the selected API. Parsing the scheme and implementing the ability to search for the required field.',
             )}
           </Typography>
         </div>
@@ -97,7 +97,7 @@ export const Welcome = () => {
               <GitHub color="action" fontSize="medium" />
             </Link>
           </div>
-          <Typography>
+          <Typography align="center">
             {t(
               'Was responsible for creating the welcome page of the project. Designed and implemented the initial page that greets users and sets the tone for the application.',
             )}

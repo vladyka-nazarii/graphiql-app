@@ -30,7 +30,7 @@ export const FieldDetails: FC<IProps> = ({ field, type, setFields }) => {
           </Typography>
           <Stack direction={'row'} spacing={1}>
             <Typography variant="body1">{typeKind.toLocaleLowerCase()}</Typography>
-            <Typography variant="body1" color={'red'}>
+            <Typography variant="body1" color={'primary'}>
               {type.name}
             </Typography>
           </Stack>

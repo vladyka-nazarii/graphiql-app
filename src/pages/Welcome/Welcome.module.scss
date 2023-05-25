@@ -29,6 +29,10 @@
 .experienceList {
   align-self: flex-start;
   margin-left: 30px;
+
+  & li {
+    list-style-image: url('./startup.png');
+  }
 }
 
 .teamInfo {

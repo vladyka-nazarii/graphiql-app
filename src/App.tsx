@@ -1,25 +1,40 @@
-import { CircularProgress, CssBaseline, ThemeProvider, createTheme } from '@mui/material/';
+import { useEffect, useState } from 'react';
+import {
+  CircularProgress,
+  CssBaseline,
+  ThemeProvider,
+  createTheme,
+  useMediaQuery,
+} from '@mui/material/';
 
 import { Header } from './components/Header/Header';
 import { Footer } from './components/Footer/Footer';
 import { AppRoutes } from './routes/AppRoutes';
 import { useLoadUser } from './hooks/useLoadUser';
-import { useAppSelector } from './hooks/redux-hooks';
 
 export const App = () => {
+  const [darkMode, setDarkMode] = useState(false);
+  const localDark = localStorage.getItem('darkTheme');
+  const prefersDark = useMediaQuery('(prefers-color-scheme: dark)');
   const loading = useLoadUser();
-  const { darkTheme } = useAppSelector((state) => state.theme);
-
   const theme = createTheme({
     palette: {
-      mode: darkTheme ? 'dark' : 'light',
+      mode: darkMode ? 'dark' : 'light',
     },
   });
+
+  useEffect(() => {
+    if (localDark) {
+      setDarkMode(!!JSON.parse(localDark));
+    } else {
+      setDarkMode(prefersDark);
+    }
+  }, [localDark, prefersDark]);
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Header />
+      <Header setDarkMode={setDarkMode} />
       <main>{(loading && <CircularProgress />) || <AppRoutes />}</main>
       <Footer />
     </ThemeProvider>
