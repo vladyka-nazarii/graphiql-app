@@ -32,7 +32,7 @@ export const Schema = () => {
     if (data) {
       return <SchemaContent types={data.__schema.types} />;
     }
-  }, [data, loading, error]);
+  }, [loading, error, data, t]);
 
   return (
     <aside>
