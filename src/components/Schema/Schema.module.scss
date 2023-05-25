@@ -1,14 +1,17 @@
 .button {
   position: absolute;
-  height: 120px;
-  writing-mode: vertical-rl;
-  font-size: 22px;
-  text-align: center;
-  color: white;
+  top: 20vh;
   transform: rotate(180deg);
+  height: 120px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  writing-mode: vertical-rl;
+  font-size: 18px;
+  color: white;
   background-color: green;
   cursor: pointer;
-  margin-top: 100px;
   right: 0;
   transition: 0.3s;
 }
@@ -16,16 +19,23 @@
 .schema {
   position: absolute;
   height: 100%;
-  width: 25%;
-  background-color: lightgrey;
+  width: 400px;
+  background-color: #f1efef;
   border-left: 5px solid green;
   right: 0;
   transform: translateX(100%);
   transition: 0.3s;
   overflow-y: scroll;
-  overflow-x: scroll;
+  padding: 10px;
 }
 
 .opened {
-  right: 25%;
+  right: 400px;
+}
+
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

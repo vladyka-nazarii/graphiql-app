@@ -6,6 +6,10 @@
   box-sizing: border-box;
 }
 
+ul {
+  list-style-type: none;
+}
+
 #root {
   min-height: 100vh;
   display: flex;
