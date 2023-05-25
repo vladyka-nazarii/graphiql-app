@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 
 import styles from './Welcome.module.scss';
-import { Avatar, Link, List, ListItem, Typography } from '@mui/material';
+import { Avatar, Link, Typography } from '@mui/material';
 import { GitHub } from '@mui/icons-material';
 
 export const Welcome = () => {
