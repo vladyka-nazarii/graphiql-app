@@ -21,7 +21,7 @@ export const Schema = () => {
     setOpen((prev) => !prev);
   };
 
-  const content = useMemo(() => {
+  const Content = useMemo(() => {
     if (loading) {
       return <CircularProgress className={styles.loading} />;
     }
@@ -48,7 +48,7 @@ export const Schema = () => {
         style={{ backgroundColor: theme.palette.background.default }}
         className={`${styles.schema} ${open && styles.opened}`}
       >
-        {content}
+        {Content}
       </section>
     </aside>
   );

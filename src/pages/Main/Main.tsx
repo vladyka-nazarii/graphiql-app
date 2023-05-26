@@ -14,7 +14,7 @@ import { checkValidationMessage } from '../../utils/checkValidationMessage';
 
 import styles from './Main.module.scss';
 
-export const Main = () => {
+const Main = () => {
   const [validationQueryMessage, setValidationQueryMessage] = useState('');
   const [validationVariablesMessage, setValidationVariablesMessage] = useState('');
   const [validationHeadersMessage, setValidationHeadersMessage] = useState('');
@@ -92,3 +92,5 @@ export const Main = () => {
     </div>
   );
 };
+
+export default Main;

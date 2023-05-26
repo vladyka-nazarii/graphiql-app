@@ -1,5 +1,6 @@
 import { FC, useMemo, useState } from 'react';
 import { Box, TextField } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 import { SchemaBreadcrumbs } from './SchemaBreadcrumbs/SchemaBreadcrumbs';
 import { IGraphQLType } from '../documentTypes/documentTypes';
@@ -17,7 +18,7 @@ interface IProps {
 export const SchemaContent: FC<IProps> = ({ types }) => {
   const [fields, setFields] = useState<IField[]>([]);
   const [search, setSearch] = useState<string>('');
-
+  const { t } = useTranslation();
   const field = useMemo(() => fields[fields.length - 1], [fields]);
 
   const fieldSections = useMemo(
@@ -65,7 +66,7 @@ export const SchemaContent: FC<IProps> = ({ types }) => {
         <>
           <TextField
             id="outlined-basic"
-            label="Search field"
+            label={t('Search')}
             variant="outlined"
             value={search}
             onChange={(e) => setSearch(e.target.value)}

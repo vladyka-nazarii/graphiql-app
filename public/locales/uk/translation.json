@@ -22,6 +22,7 @@
   "QUERY VARIABLES": "ЗМІННІ ЗАПИТУ",
   "HTTP HEADERS": "ЗАГОЛОВКИ HTTP",
   "SCHEMA": "СХЕМА",
+  "Search": "Пошук",
   "About the project": "Про проект",
   "GraphiQL is a web-based playground for making GraphQL requests. It offers a user-friendly interface with features like syntax highlighting, auto-completion, and real-time response viewing. It allows developers to explore GraphQL APIs, debug queries, and collaborate on query development.": "GraphiQL — це веб-майданчик для створення запитів GraphQL. Він пропонує зручний інтерфейс із такими функціями, як підсвічування синтаксису, автозавершення та перегляд відповідей у реальному часі. Це дозволяє розробникам досліджувати API GraphQL, налагоджувати запити та співпрацювати над розробкою запитів.",
   "The Rolling Scopes is an independent international developer community founded in 2013. Everyone can study at RS School, regardless of age, professional employment and place of residence. Volunteer developers from various companies and countries participate in the training. These courses combine online and offline learning. School mentors teach students in their free time and for free!": "The Rolling Scopes — незалежна міжнародна спільнота розробників, заснована в 2013 році. Навчатися в RS School може кожен, незалежно від віку, професійної діяльності та місця проживання. У тренінгу беруть участь розробники-волонтери з різних компаній і країн. Ці курси поєднують онлайн і офлайн навчання. Ментори школи навчають учнів у вільний час і безкоштовно!",
