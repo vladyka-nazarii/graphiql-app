@@ -5,7 +5,7 @@ import { Link, Typography } from '@mui/material';
 
 export const Footer = () => (
   <footer className={styles.footer}>
-    <Link href="https://github.com/vladyka-nazarii">
+    <Link href="https://github.com/vladyka-nazarii/graphiql-app/">
       <GitHub htmlColor="#fff" fontSize="large" />
     </Link>
     <Typography color="white" variant="h5">

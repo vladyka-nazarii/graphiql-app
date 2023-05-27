@@ -36,5 +36,14 @@
   "Frontend developer": "Frontend developer",
   "Served as the team leader and was responsible for the basic layout of the project. As the leader, provided guidance and direction to the team while taking charge of designing and structuring the user interface.": "Served as the team leader and was responsible for the basic layout of the project. As the leader, provided guidance and direction to the team while taking charge of designing and structuring the user interface.",
   "Firebase setup for user authentication. Development of forms, redirects and routes for registration and login. Development of documentation for the selected API. Parsing the scheme and implementing the ability to search for the required field.": "Firebase setup for user authentication. Development of forms, redirects and routes for registration and login. Development of documentation for the selected API. Parsing the scheme and implementing the ability to search for the required field.",
-  "Was responsible for creating the welcome page of the project. Designed and implemented the initial page that greets users and sets the tone for the application.": "Was responsible for creating the welcome page of the project. Designed and implemented the initial page that greets users and sets the tone for the application."
+  "Was responsible for creating the welcome page of the project. Designed and implemented the initial page that greets users and sets the tone for the application.": "Was responsible for creating the welcome page of the project. Designed and implemented the initial page that greets users and sets the tone for the application.",
+  "Email is required": "Email is required",
+  "Invalid email": "Invalid email",
+  "Password is required": "Password is required",
+  "Confirm your password": "Confirm your password",
+  "Passwords must match": "Passwords must match",
+  "At least 8 characters": "At least 8 characters",
+  "At least 1 letter": "At least 1 letter",
+  "At least 1 number": "At least 1 number",
+  "At least 1 special symbol": "At least 1 special symbol"
 }

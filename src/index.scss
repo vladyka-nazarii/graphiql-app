@@ -15,6 +15,10 @@ ul {
   display: flex;
   flex-direction: column;
   font-family: 'Roboto';
+
+  .notistack-SnackbarContainer {
+    margin-bottom: 50px;
+  }
 }
 
 main {

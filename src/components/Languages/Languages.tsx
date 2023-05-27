@@ -14,18 +14,15 @@ export const Languages = () => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleClose: MouseEventHandler<HTMLLIElement> = (e) => {
+    const target = e.currentTarget as HTMLLIElement;
+    changeLanguage(target.dataset.value);
     setAnchorEl(null);
   };
 
   const {
     i18n: { language },
   } = useTranslation();
-
-  const onClick: MouseEventHandler<HTMLDivElement> = (e) => {
-    const target = e.target as HTMLDivElement;
-    changeLanguage(target.dataset.value);
-  };
 
   return (
     <div>
@@ -54,20 +51,20 @@ export const Languages = () => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>
-          <div className={styles.container} data-value="en" onClick={onClick}>
+        <MenuItem data-value="en" onClick={handleClose}>
+          <div className={styles.container}>
             <img className={styles.icon} src="./en.png" />
             English
           </div>
         </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <div className={styles.container} data-value="uk" onClick={onClick}>
+        <MenuItem data-value="uk" onClick={handleClose}>
+          <div className={styles.container}>
             <img className={styles.icon} src="./uk.png" />
             Українська
           </div>
         </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <div className={styles.container} data-value="ru" onClick={onClick}>
+        <MenuItem data-value="ru" onClick={handleClose}>
+          <div className={styles.container}>
             <img className={styles.icon} src="./ru.png" />
             Русский
           </div>

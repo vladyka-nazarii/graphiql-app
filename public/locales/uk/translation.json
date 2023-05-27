@@ -36,5 +36,14 @@
   "Frontend developer": "Фронтенд-розробник",
   "Served as the team leader and was responsible for the basic layout of the project. As the leader, provided guidance and direction to the team while taking charge of designing and structuring the user interface.": "Виконував обов’язки керівника групи та відповідав за базовий макет проекту. Як керівник, він керував командою та відповідав за розробку та структурування інтерфейсу користувача.",
   "Firebase setup for user authentication. Development of forms, redirects and routes for registration and login. Development of documentation for the selected API. Parsing the scheme and implementing the ability to search for the required field.": "Сетап Firebase для автентифікації користувача. Розробка форм,редіректів та роутів для реєстрації та логіну. Розробка документації до обраного АПІ. Парсинг схеми та впровадження можливості пошуку необхідного поля.",
-  "Was responsible for creating the welcome page of the project. Designed and implemented the initial page that greets users and sets the tone for the application.": "Відповідав за створення вітальної сторінки проекту. Розроблено та реалізовано початкову сторінку, яка зустрічає користувачів і задає тон додатку."
+  "Was responsible for creating the welcome page of the project. Designed and implemented the initial page that greets users and sets the tone for the application.": "Відповідав за створення вітальної сторінки проекту. Розроблено та реалізовано початкову сторінку, яка зустрічає користувачів і задає тон додатку.",
+  "Email is required": "Потрібна пошта",
+  "Invalid email": "Недійсна пошта",
+  "Password is required": "Потрібен пароль",
+  "Confirm your password": "Підтвердіть свій пароль",
+  "Passwords must match": "Паролі повинні збігатися",
+  "At least 8 characters": "Мінімум 8 символів",
+  "At least 1 letter": "Мінімум 1 буква",
+  "At least 1 number": "Мінімум 1 цифра",
+  "At least 1 special symbol": "Мінімум 1 спец символ"
 }

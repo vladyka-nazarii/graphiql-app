@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { FormikProvider, useFormik } from 'formik';
 import { Button, CircularProgress, Link, Stack, Typography } from '@mui/material';
@@ -35,6 +35,11 @@ export const RegisterForm = () => {
   });
 
   const { handleSubmit } = formik;
+
+  useEffect(() => {
+    formik.validateForm();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [t]);
 
   const handleSignUp = async (email: string, password: string) => {
     try {

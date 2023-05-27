@@ -36,5 +36,14 @@
   "Frontend developer": "Фронтенд-разработчик",
   "Served as the team leader and was responsible for the basic layout of the project. As the leader, provided guidance and direction to the team while taking charge of designing and structuring the user interface.": "Выступал в качестве руководителя группы и отвечал за базовую компоновку проекта. В качестве лидера давал настановы и указания команде, а также отвечал за разработку и структурирование пользовательского интерфейса.",
   "Firebase setup for user authentication. Development of forms, redirects and routes for registration and login. Development of documentation for the selected API. Parsing the scheme and implementing the ability to search for the required field.": "Сетап Firebase для аутентификации пользователя. Разработка форм, редиректов и роутов для регистрации и логина. Разработка документации к избранному API. Парсинг схемы и реализация возможности поиска необходимого поля.",
-  "Was responsible for creating the welcome page of the project. Designed and implemented the initial page that greets users and sets the tone for the application.": "Отвечал за создание приветственной страницы проекта. Разработана и реализована начальная страница, которая приветствует пользователей и задает тон приложению."
+  "Was responsible for creating the welcome page of the project. Designed and implemented the initial page that greets users and sets the tone for the application.": "Отвечал за создание приветственной страницы проекта. Разработана и реализована начальная страница, которая приветствует пользователей и задает тон приложению.",
+  "Email is required": "Требуется почта",
+  "Invalid email": "Неверная почта",
+  "Password is required": "Требуется пароль",
+  "Confirm your password": "Подтвердите свой пароль",
+  "Passwords must match": "Пароли должны совпадать",
+  "At least 8 characters": "Минимум 8 символов",
+  "At least 1 letter": "Минимум 1 буква",
+  "At least 1 number": "Минимум 1 цифра",
+  "At least 1 special symbol": "Минимум 1 спец символ"
 }
