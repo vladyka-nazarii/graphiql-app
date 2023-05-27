@@ -16,10 +16,10 @@ const passwordValidation = () =>
   yup
     .string()
     .required(t(Validation.PasswordRequired) || Validation.PasswordRequired)
-    .matches(/.{8,}/, t(Validation.Need8Characters) || Validation.Need8Characters)
-    .matches(/[a-ї]{1,}/i, t(Validation.Need1Letter) || Validation.Need1Letter)
-    .matches(/[0-9]{1,}/, t(Validation.Need1Number) || Validation.Need1Number)
-    .matches(/[\W_]{1,}/i, t(Validation.Need1Symbol) || Validation.Need1Symbol);
+    .min(8, t(Validation.MinLength) || Validation.MinLength)
+    .matches(/[a-zA-Zа-яА-ЯёЁєЄіІїЇ]{1,}/i, t(Validation.NeedLetter) || Validation.NeedLetter)
+    .matches(/[0-9]{1,}/, t(Validation.NeedNumber) || Validation.NeedNumber)
+    .matches(/[\W_]{1,}/i, t(Validation.NeedSymbol) || Validation.NeedSymbol);
 
 const confirmPasswordValidation = () =>
   yup

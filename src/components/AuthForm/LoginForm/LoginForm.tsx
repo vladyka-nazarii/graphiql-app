@@ -34,7 +34,7 @@ export const LoginForm = () => {
     },
   });
 
-  const { handleSubmit } = formik;
+  const { handleSubmit, validateForm } = formik;
 
   const handleSignIn = async (email: string, password: string) => {
     try {
@@ -51,9 +51,8 @@ export const LoginForm = () => {
   };
 
   useEffect(() => {
-    formik.validateForm();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [t]);
+    validateForm();
+  }, [validateForm, t]);
 
   return (
     <FormikProvider value={formik}>

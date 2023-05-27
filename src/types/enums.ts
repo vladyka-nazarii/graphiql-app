@@ -12,8 +12,8 @@ export enum Validation {
   PasswordRequired = 'Password is required',
   PasswordConfirm = 'Confirm your password',
   PasswordMatch = 'Passwords must match',
-  Need8Characters = 'At least 8 characters',
-  Need1Letter = 'At least 1 letter',
-  Need1Number = 'At least 1 number',
-  Need1Symbol = 'At least 1 special symbol',
+  MinLength = 'At least 8 characters',
+  NeedLetter = 'At least 1 letter',
+  NeedNumber = 'At least 1 number',
+  NeedSymbol = 'At least 1 special symbol',
 }
