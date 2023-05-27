@@ -45,5 +45,8 @@
   "At least 8 characters": "Минимум 8 символов",
   "At least 1 letter": "Минимум 1 буква",
   "At least 1 number": "Минимум 1 цифра",
-  "At least 1 special symbol": "Минимум 1 спец символ"
+  "At least 1 special symbol": "Минимум 1 спец символ",
+  "Wrong email or password": "Неправильная почта или пароль",
+  "Too many requests": "Слишком много запросов",
+  "Email already exists": "Почта уже существует"
 }

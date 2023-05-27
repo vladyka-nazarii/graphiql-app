@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { FormikProvider, useFormik } from 'formik';
 import { Button, CircularProgress, Link, Stack, Typography } from '@mui/material';
@@ -45,10 +45,15 @@ export const LoginForm = () => {
     } catch (error) {
       if (error instanceof Error) {
         setLoading(false);
-        enqueueSnackbar(error.message, { variant: 'error' });
+        enqueueSnackbar(t(error.message) || error.message, { variant: 'error' });
       }
     }
   };
+
+  useEffect(() => {
+    formik.validateForm();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [t]);
 
   return (
     <FormikProvider value={formik}>

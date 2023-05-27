@@ -45,5 +45,8 @@
   "At least 8 characters": "Мінімум 8 символів",
   "At least 1 letter": "Мінімум 1 буква",
   "At least 1 number": "Мінімум 1 цифра",
-  "At least 1 special symbol": "Мінімум 1 спец символ"
+  "At least 1 special symbol": "Мінімум 1 спец символ",
+  "Wrong email or password": "Неправильна пошта або пароль",
+  "Too many requests": "Забагато запитів",
+  "Email already exists": "Пошта вже існує"
 }

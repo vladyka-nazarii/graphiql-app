@@ -36,11 +36,6 @@ export const RegisterForm = () => {
 
   const { handleSubmit } = formik;
 
-  useEffect(() => {
-    formik.validateForm();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [t]);
-
   const handleSignUp = async (email: string, password: string) => {
     try {
       setLoading(true);
@@ -50,10 +45,15 @@ export const RegisterForm = () => {
     } catch (error) {
       if (error instanceof Error) {
         setLoading(false);
-        enqueueSnackbar(error.message, { variant: 'error' });
+        enqueueSnackbar(t(error.message) || error.message, { variant: 'error' });
       }
     }
   };
+
+  useEffect(() => {
+    formik.validateForm();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [t]);
 
   return (
     <FormikProvider value={formik}>
