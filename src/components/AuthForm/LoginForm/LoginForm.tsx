@@ -1,15 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
 import { FormikProvider, useFormik } from 'formik';
-import { Button, CircularProgress, Stack, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Button, CircularProgress, Link, Stack, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 import { signInUser } from '../../../firebase/sign-in-user';
 import { useAppDispatch } from '../../../hooks/redux-hooks';
 import { setUser } from '../../../redux/slices/userSlice';
 import { validationSignIn } from '../../../utils/validation-schema';
 import { enqueueSnackbar } from 'notistack';
-import { PasswordInput } from '../Inputs/PasswordInput/PasswordInput';
 import { CustomTextInput } from '../Inputs/CustomTextInput/CustomTextInput';
+import { PasswordInput } from '../Inputs/PasswordInput/PasswordInput';
 
 export interface ILogin {
   email: string;
@@ -19,6 +20,8 @@ export interface ILogin {
 export const LoginForm = () => {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
+  const { t } = useTranslation();
+  const navigate = useNavigate();
   const formik = useFormik<ILogin>({
     initialValues: {
       email: '',
@@ -32,7 +35,7 @@ export const LoginForm = () => {
     },
   });
 
-  const { handleSubmit } = formik;
+  const { handleSubmit, validateForm } = formik;
 
   const handleSignIn = async (email: string, password: string) => {
     try {
@@ -43,10 +46,14 @@ export const LoginForm = () => {
     } catch (error) {
       if (error instanceof Error) {
         setLoading(false);
-        enqueueSnackbar(error.message, { variant: 'error' });
+        enqueueSnackbar(t(error.message) || error.message, { variant: 'error' });
       }
     }
   };
+
+  useEffect(() => {
+    validateForm();
+  }, [validateForm, t]);
 
   return (
     <FormikProvider value={formik}>
@@ -56,18 +63,25 @@ export const LoginForm = () => {
         <form onSubmit={handleSubmit}>
           <Stack spacing={2} padding={'20px'} width={'300px'}>
             <Typography variant="h4" gutterBottom align="center">
-              Sign In
+              {t('Sign In')}
             </Typography>
             <Stack spacing={0.5}>
-              <CustomTextInput name="email" title="Email" />
-              <PasswordInput />
+              <CustomTextInput name="email" title={t('Email')} />
+              <PasswordInput
+                id="outlined-adornment-password"
+                name="password"
+                title={t('Password')}
+              />
             </Stack>
             <Stack spacing={0.5}>
               <Button color="primary" variant="contained" fullWidth type="submit">
-                Sign In
+                {t('Sign In')}
               </Button>
               <Typography variant="subtitle1" gutterBottom>
-                or you can <Link to="/register">create new account</Link>
+                {t('Or you can')}{' '}
+                <Link onClick={() => navigate('/register')} style={{ cursor: 'pointer' }}>
+                  {t('create new account')}
+                </Link>
               </Typography>
             </Stack>
           </Stack>

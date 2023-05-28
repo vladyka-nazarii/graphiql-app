@@ -1,21 +1,26 @@
 import { FocusEventHandler, useState } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
+import { useTranslation } from 'react-i18next';
+import { useTheme } from '@mui/material';
 
 import { Schema } from '../../components/Schema/Schema';
 import { BasicTabs } from '../../components/Tabs/Tabs';
 import { useResponse } from '../../hooks/useResponse';
 import { QUERY_EXAMPLE } from '../../apollo/queryExample';
 import { queryValidation } from '../../apollo/queryValidation';
+import { RequestButton } from '../../components/UI/RequestButton/RequestButton';
 import { Message } from '../../types/enums';
 import { checkValidationMessage } from '../../utils/checkValidationMessage';
 
 import styles from './Main.module.scss';
 
-export const Main = () => {
+const Main = () => {
   const [validationQueryMessage, setValidationQueryMessage] = useState('');
   const [validationVariablesMessage, setValidationVariablesMessage] = useState('');
   const [validationHeadersMessage, setValidationHeadersMessage] = useState('');
   const { setQuery, setVariables, setHeaders, loadData, loading, data } = useResponse();
+  const { t } = useTranslation();
+  const theme = useTheme();
 
   const handleVariablesValidation = (value: string) => {
     setValidationVariablesMessage(value);
@@ -58,14 +63,14 @@ export const Main = () => {
   };
 
   return (
-    <div className={styles.main}>
-      <div className={styles.query}>
+    <div className={styles.main} style={{ backgroundColor: theme.palette.background.default }}>
+      <div>
         <CodeMirror
           value={QUERY_EXAMPLE}
-          height="100%"
+          height="calc(75vh - 64px - 62px)"
           width="calc(50vw - 16px)"
           editable={true}
-          theme="light"
+          theme={theme.palette.mode}
           onBlur={onBlur}
         />
         <BasicTabs
@@ -76,19 +81,16 @@ export const Main = () => {
         />
       </div>
       <CodeMirror
-        value={!validationMessage ? data : validationMessage}
-        height="calc(100vh - 64px - 64px)"
-        width="calc(50vw + 16px)"
+        value={!validationMessage ? data : t(validationMessage) || ''}
+        height="calc(100vh - 64px - 62px)"
+        width="calc(calc(50vw + 16px) + 16px)"
         editable={false}
-        theme="light"
+        theme={theme.palette.mode}
       />
       <Schema />
-      <img
-        className={styles.play}
-        src={loading ? './stop-button.svg' : './play-button.svg'}
-        alt="play"
-        onClick={onClick}
-      />
+      <RequestButton onClick={onClick} loading={loading} />
     </div>
   );
 };
+
+export default Main;

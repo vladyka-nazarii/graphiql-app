@@ -1,16 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
 import { FormikProvider, useFormik } from 'formik';
-import { Button, CircularProgress, Stack, Typography } from '@mui/material';
+import { Button, CircularProgress, Link, Stack, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 import { useAppDispatch } from '../../../hooks/redux-hooks';
 import { setUser } from '../../../redux/slices/userSlice';
 import { signUpUser } from '../../../firebase/sign-up-user';
 import { validationSignUp } from '../../../utils/validation-schema';
-import { Link } from 'react-router-dom';
 import { enqueueSnackbar } from 'notistack';
 import { CustomTextInput } from '../Inputs/CustomTextInput/CustomTextInput';
-import { PasswordInput } from '../Inputs/PasswordInput/PasswordInput';
 import { ILogin } from '../LoginForm/LoginForm';
+import { PasswordInput } from '../Inputs/PasswordInput/PasswordInput';
 
 export interface IRegister extends ILogin {
   confirmPassword: string;
@@ -19,7 +20,8 @@ export interface IRegister extends ILogin {
 export const RegisterForm = () => {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
-
+  const { t } = useTranslation();
+  const navigate = useNavigate();
   const formik = useFormik<IRegister>({
     initialValues: {
       email: '',
@@ -33,7 +35,7 @@ export const RegisterForm = () => {
     },
   });
 
-  const { handleSubmit } = formik;
+  const { handleSubmit, validateForm } = formik;
 
   const handleSignUp = async (email: string, password: string) => {
     try {
@@ -44,10 +46,14 @@ export const RegisterForm = () => {
     } catch (error) {
       if (error instanceof Error) {
         setLoading(false);
-        enqueueSnackbar(error.message, { variant: 'error' });
+        enqueueSnackbar(t(error.message) || error.message, { variant: 'error' });
       }
     }
   };
+
+  useEffect(() => {
+    validateForm();
+  }, [validateForm, t]);
 
   return (
     <FormikProvider value={formik}>
@@ -57,19 +63,30 @@ export const RegisterForm = () => {
         <form onSubmit={handleSubmit}>
           <Stack spacing={2} padding={'20px'} width={'300px'}>
             <Typography variant="h4" gutterBottom align="center">
-              Sign Up
+              {t('Sign Up')}
             </Typography>
             <Stack spacing={0.5}>
-              <CustomTextInput name="email" title="Email" />
-              <PasswordInput />
-              <CustomTextInput name="confirmPassword" title="Confirm password" type="password" />
+              <CustomTextInput name="email" title={t('Email')} />
+              <PasswordInput
+                id="outlined-adornment-password"
+                name="password"
+                title={t('Password')}
+              />
+              <PasswordInput
+                id="outlined-adornment-confirm-password"
+                name="confirmPassword"
+                title={t('Confirm password')}
+              />
             </Stack>
             <Stack spacing={0.5}>
               <Button color="primary" variant="contained" fullWidth type="submit">
-                Sign Up
+                {t('Sign Up')}
               </Button>
               <Typography variant="subtitle1" gutterBottom>
-                if you <Link to="/login">already have account</Link>
+                {t('You ')}
+                <Link onClick={() => navigate('/login')} style={{ cursor: 'pointer' }}>
+                  {t('already have account')}
+                </Link>
               </Typography>
             </Stack>
           </Stack>

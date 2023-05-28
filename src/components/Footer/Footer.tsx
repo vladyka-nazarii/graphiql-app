@@ -1,13 +1,18 @@
+import { GitHub } from '@mui/icons-material';
 import styles from './Footer.module.css';
+import { RSSchool } from '../UI/RSSchool/RSSchool';
+import { Link, Typography } from '@mui/material';
 
 export const Footer = () => (
   <footer className={styles.footer}>
-    <a href="https://github.com/vladyka-nazarii">
-      <img className={styles.img} src="./github-white.svg" alt="GitHub"></img>
-    </a>
-    <p className={styles.year}>2023</p>
-    <a href="https://rs.school/react">
-      <img className={styles.img} src="./rs-school.svg" alt="RS-School"></img>
-    </a>
+    <Link href="https://github.com/vladyka-nazarii/graphiql-app/">
+      <GitHub htmlColor="#fff" fontSize="large" />
+    </Link>
+    <Typography color="white" variant="h5">
+      2023
+    </Typography>
+    <Link href="https://rs.school/react">
+      <RSSchool />
+    </Link>
   </footer>
 );

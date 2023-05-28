@@ -14,8 +14,11 @@ ul {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #e5e5e5;
   font-family: 'Roboto';
+
+  .notistack-SnackbarContainer {
+    margin-bottom: 50px;
+  }
 }
 
 main {
@@ -25,9 +28,4 @@ main {
   justify-content: center;
   align-items: center;
   width: 100%;
-}
-
-.cm-theme-light,
-.cm-theme-dark {
-  flex-grow: 1;
 }

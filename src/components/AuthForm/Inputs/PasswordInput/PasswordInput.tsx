@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import {
   FormControl,
   FormHelperText,
@@ -10,11 +10,17 @@ import {
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useFormikContext } from 'formik';
 
-import { ILogin } from '../../LoginForm/LoginForm';
+import { IRegister } from '../../RegisterForm/RegisterForm';
 
-export const PasswordInput = () => {
+interface IPasswordInputProps {
+  id: string;
+  name: string;
+  title: string;
+}
+
+export const PasswordInput = memo(({ id, name, title }: IPasswordInputProps) => {
   const [showPassword, setShowPassword] = useState(false);
-  const { values, touched, errors, handleChange } = useFormikContext<ILogin>();
+  const { values, touched, errors, handleChange } = useFormikContext<IRegister>();
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -24,13 +30,13 @@ export const PasswordInput = () => {
 
   return (
     <FormControl variant="outlined" error={touched.password && !!errors.password}>
-      <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+      <InputLabel htmlFor={id}>{title}</InputLabel>
       <OutlinedInput
-        id="outlined-adornment-password"
-        name="password"
+        id={id}
+        name={name}
         type={showPassword ? 'text' : 'password'}
         onChange={handleChange}
-        value={values.password}
+        value={values[name as keyof IRegister]}
         endAdornment={
           <InputAdornment position="end">
             <IconButton
@@ -43,11 +49,11 @@ export const PasswordInput = () => {
             </IconButton>
           </InputAdornment>
         }
-        label="Password"
+        label={title}
       />
       <FormHelperText>
         {(touched.password && errors.password && errors.password) || ' '}
       </FormHelperText>
     </FormControl>
   );
-};
+});

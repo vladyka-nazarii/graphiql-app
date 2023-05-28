@@ -34,7 +34,7 @@ export const FieldList: FC<IProps> = ({ data, setFields, title }) => {
                   onClick={() => handleClick(item)}
                 >
                   <Typography>{fieldName}:</Typography>
-                  <Typography color={'red'}>{typeName}</Typography>
+                  <Typography color={'primary'}>{typeName}</Typography>
                 </ListItemButton>
               </ListItem>
             );

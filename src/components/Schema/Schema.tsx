@@ -1,33 +1,39 @@
 import { useMemo, useState } from 'react';
 import { useLazyQuery } from '@apollo/client';
-import { CircularProgress, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import { CircularProgress, Typography, useTheme } from '@mui/material';
 
 import { GET_TYPES } from '../../apollo/queryTypes';
 import { SchemaContent } from './SchemaContent/SchemaContent';
 import { ISchemaType } from './documentTypes/documentTypes';
 
 import styles from './Schema.module.scss';
+import { Message } from '../../types/enums';
 
 export const Schema = () => {
   const [open, setOpen] = useState(false);
   const [loadData, { loading, data, error }] = useLazyQuery<ISchemaType>(GET_TYPES);
+  const { t } = useTranslation();
+  const theme = useTheme();
 
   const handleOpen = () => {
     loadData();
     setOpen((prev) => !prev);
   };
 
-  const content = useMemo(() => {
+  const Content = useMemo(() => {
     if (loading) {
       return <CircularProgress className={styles.loading} />;
     }
     if (error) {
-      return error.message;
+      return error.message === Message.ResponseNotSuccessful
+        ? t(Message.ResponseNotSuccessful)
+        : error.message;
     }
     if (data) {
       return <SchemaContent types={data.__schema.types} />;
     }
-  }, [data, loading, error]);
+  }, [loading, error, data, t]);
 
   return (
     <aside>
@@ -36,9 +42,14 @@ export const Schema = () => {
         className={`${styles.button} ${open && styles.opened}`}
         onClick={handleOpen}
       >
-        SCHEMA
+        {t('SCHEMA')}
       </Typography>
-      <section className={`${styles.schema} ${open && styles.opened}`}>{content}</section>
+      <section
+        style={{ backgroundColor: theme.palette.background.default }}
+        className={`${styles.schema} ${open && styles.opened}`}
+      >
+        {Content}
+      </section>
     </aside>
   );
 };

@@ -3,6 +3,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import CodeMirror from '@uiw/react-codemirror';
+import { useTranslation } from 'react-i18next';
+import { useTheme } from '@mui/material';
 
 import { TabPanel } from './TabPanel';
 import { variablesValidation } from '../../apollo/variablesValidation';
@@ -25,6 +27,8 @@ export const BasicTabs = ({
   const [value, setValue] = useState(0);
   const [variablesValue, setVariablesValue] = useState('{}');
   const [headersValue, setHeadersValue] = useState('{}');
+  const { t } = useTranslation();
+  const theme = useTheme();
 
   const handleVariablesValue = (value: string) => {
     setVariablesValue(value);
@@ -66,20 +70,20 @@ export const BasicTabs = ({
   };
 
   return (
-    <Box sx={{ width: '100%', height: '250px' }}>
+    <Box sx={{ width: '100%', height: 'calc(25vh - 64px - 61.5px)' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="QUERY VARIABLES" {...a11yProps(0)} />
-          <Tab label="HTTP HEADERS" {...a11yProps(1)} />
+          <Tab label={t('QUERY VARIABLES')} {...a11yProps(0)} />
+          <Tab label={t('HTTP HEADERS')} {...a11yProps(1)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
         <CodeMirror
           value={variablesValue}
-          height="200px"
+          height="calc(25vh - 48px)"
           width="100%"
           editable={true}
-          theme="light"
+          theme={theme.palette.mode}
           onChange={handleVariablesValue}
           onBlur={handleBlurVariables}
         />
@@ -87,10 +91,10 @@ export const BasicTabs = ({
       <TabPanel value={value} index={1}>
         <CodeMirror
           value={headersValue}
-          height="200px"
+          height="calc(25vh - 48px)"
           width="100%"
           editable={true}
-          theme="light"
+          theme={theme.palette.mode}
           onChange={handleHeadersValue}
           onBlur={handleBlurHeaders}
         />
