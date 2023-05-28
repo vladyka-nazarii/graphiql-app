@@ -11,6 +11,7 @@ import { validationSignUp } from '../../../utils/validation-schema';
 import { enqueueSnackbar } from 'notistack';
 import { CustomTextInput } from '../Inputs/CustomTextInput/CustomTextInput';
 import { ILogin } from '../LoginForm/LoginForm';
+import { PasswordInput } from '../Inputs/PasswordInput/PasswordInput';
 
 export interface IRegister extends ILogin {
   confirmPassword: string;
@@ -66,11 +67,15 @@ export const RegisterForm = () => {
             </Typography>
             <Stack spacing={0.5}>
               <CustomTextInput name="email" title={t('Email')} />
-              <CustomTextInput name="password" title={t('Password')} type="password" />
-              <CustomTextInput
+              <PasswordInput
+                id="outlined-adornment-password"
+                name="password"
+                title={t('Password')}
+              />
+              <PasswordInput
+                id="outlined-adornment-confirm-password"
                 name="confirmPassword"
                 title={t('Confirm password')}
-                type="password"
               />
             </Stack>
             <Stack spacing={0.5}>

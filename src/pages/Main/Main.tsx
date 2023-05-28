@@ -67,7 +67,7 @@ const Main = () => {
       <div>
         <CodeMirror
           value={QUERY_EXAMPLE}
-          height="calc(75vh - 64px - 61.5px)"
+          height="calc(75vh - 64px - 62px)"
           width="calc(50vw - 16px)"
           editable={true}
           theme={theme.palette.mode}
@@ -82,7 +82,7 @@ const Main = () => {
       </div>
       <CodeMirror
         value={!validationMessage ? data : t(validationMessage) || ''}
-        height="calc(100vh - 64px - 61.5px)"
+        height="calc(100vh - 64px - 62px)"
         width="calc(calc(50vw + 16px) + 16px)"
         editable={false}
         theme={theme.palette.mode}

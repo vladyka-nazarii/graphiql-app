@@ -10,6 +10,7 @@ import { setUser } from '../../../redux/slices/userSlice';
 import { validationSignIn } from '../../../utils/validation-schema';
 import { enqueueSnackbar } from 'notistack';
 import { CustomTextInput } from '../Inputs/CustomTextInput/CustomTextInput';
+import { PasswordInput } from '../Inputs/PasswordInput/PasswordInput';
 
 export interface ILogin {
   email: string;
@@ -66,7 +67,11 @@ export const LoginForm = () => {
             </Typography>
             <Stack spacing={0.5}>
               <CustomTextInput name="email" title={t('Email')} />
-              <CustomTextInput name="password" title={t('Password')} type="password" />
+              <PasswordInput
+                id="outlined-adornment-password"
+                name="password"
+                title={t('Password')}
+              />
             </Stack>
             <Stack spacing={0.5}>
               <Button color="primary" variant="contained" fullWidth type="submit">
