@@ -9,7 +9,7 @@ import { setUser } from '../../../redux/slices/userSlice';
 import { signUpUser } from '../../../firebase/sign-up-user';
 import { validationSignUp } from '../../../utils/validation-schema';
 import { enqueueSnackbar } from 'notistack';
-import { CustomTextInput } from '../Inputs/CustomTextInput/CustomTextInput';
+import { CustomInput } from '../Inputs/CustomInput/CustomInput';
 import { ILogin } from '../LoginForm/LoginForm';
 import { PasswordInput } from '../Inputs/PasswordInput/PasswordInput';
 
@@ -66,7 +66,7 @@ export const RegisterForm = () => {
               {t('Sign Up')}
             </Typography>
             <Stack spacing={0.5}>
-              <CustomTextInput name="email" title={t('Email')} />
+              <CustomInput name="email" title={t('Email')} />
               <PasswordInput
                 id="outlined-adornment-password"
                 name="password"
