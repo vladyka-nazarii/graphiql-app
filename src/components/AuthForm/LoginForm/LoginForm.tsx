@@ -9,7 +9,7 @@ import { useAppDispatch } from '../../../hooks/redux-hooks';
 import { setUser } from '../../../redux/slices/userSlice';
 import { validationSignIn } from '../../../utils/validation-schema';
 import { enqueueSnackbar } from 'notistack';
-import { CustomTextInput } from '../Inputs/CustomTextInput/CustomTextInput';
+import { CustomInput } from '../Inputs/CustomInput/CustomInput';
 import { PasswordInput } from '../Inputs/PasswordInput/PasswordInput';
 
 export interface ILogin {
@@ -66,7 +66,7 @@ export const LoginForm = () => {
               {t('Sign In')}
             </Typography>
             <Stack spacing={0.5}>
-              <CustomTextInput name="email" title={t('Email')} />
+              <CustomInput name="email" title={t('Email')} />
               <PasswordInput
                 id="outlined-adornment-password"
                 name="password"

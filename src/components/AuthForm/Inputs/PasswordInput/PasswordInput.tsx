@@ -14,7 +14,7 @@ import { IRegister } from '../../RegisterForm/RegisterForm';
 
 interface IPasswordInputProps {
   id: string;
-  name: string;
+  name: 'password' | 'confirmPassword';
   title: string;
 }
 
@@ -24,12 +24,8 @@ export const PasswordInput = memo(({ id, name, title }: IPasswordInputProps) => 
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-  };
-
   return (
-    <FormControl variant="outlined" error={touched.password && !!errors.password}>
+    <FormControl variant="outlined" error={touched[name] && !!errors[name]}>
       <InputLabel htmlFor={id}>{title}</InputLabel>
       <OutlinedInput
         id={id}
@@ -42,7 +38,6 @@ export const PasswordInput = memo(({ id, name, title }: IPasswordInputProps) => 
             <IconButton
               aria-label="toggle password visibility"
               onClick={handleClickShowPassword}
-              onMouseDown={handleMouseDownPassword}
               edge="end"
             >
               {showPassword ? <VisibilityOff /> : <Visibility />}
@@ -51,9 +46,7 @@ export const PasswordInput = memo(({ id, name, title }: IPasswordInputProps) => 
         }
         label={title}
       />
-      <FormHelperText>
-        {(touched.password && errors.password && errors.password) || ' '}
-      </FormHelperText>
+      <FormHelperText>{(touched[name] && errors[name] && errors[name]) || ' '}</FormHelperText>
     </FormControl>
   );
 });
