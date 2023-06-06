@@ -10,8 +10,8 @@ export const CloseButton: FC<ICloseProps> = ({ handleClose }) => {
     <CloseIcon
       sx={{
         position: 'absolute',
-        top: '15px',
-        right: '20px',
+        top: '10px',
+        right: '16px',
         width: '40px',
         height: '40px',
         cursor: 'pointer',
