@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, memo, useEffect, useState } from 'react';
-import { AppBar, Container, Toolbar, useMediaQuery } from '@mui/material';
+import { AppBar, Container, Toolbar, useMediaQuery, useTheme } from '@mui/material';
 
 import { DesktopMenu } from './DesktopMenu/DesktopMenu';
 import { MobileMenu } from './MobileMenu/MobileMenu';
@@ -11,6 +11,7 @@ interface IHeaderProps {
 }
 
 export const Header = memo(({ setDarkMode }: IHeaderProps) => {
+  const theme = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [showBurgerMenu, setShowBurgerMenu] = useState(false);
   const isSmallScreen = useMediaQuery('(max-width: 767px)');
@@ -46,7 +47,11 @@ export const Header = memo(({ setDarkMode }: IHeaderProps) => {
     <AppBar
       color={isScrolled ? 'secondary' : 'primary'}
       enableColorOnDark={isScrolled}
-      sx={{ transition: 'all 0.5s', position: 'sticky', top: '0' }}
+      sx={{
+        transition: `all ${theme.transitions.duration.standard}ms`,
+        position: 'sticky',
+        top: '0',
+      }}
     >
       <Container>
         <Toolbar sx={{ justifyContent: 'space-between' }}>

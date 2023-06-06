@@ -37,7 +37,7 @@ export const MobileMenu: FC<IBurgerMenuProps> = ({
           backgroundColor: theme.palette.primary.main,
           top: '0',
           right: showBurgerMenu ? '0' : '-100%',
-          transition: 'all 0.5s',
+          transition: `${theme.transitions.duration.standard}ms`,
           zIndex: '10000',
         }}
         width={'320px'}
