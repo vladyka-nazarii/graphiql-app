@@ -1,5 +1,5 @@
 import { Dispatch, FC, SetStateAction, useEffect } from 'react';
-import { Stack, SwipeableDrawer } from '@mui/material';
+import { Drawer, Stack } from '@mui/material';
 
 import { ThemeControls } from '../ThemeControls/ThemeControls';
 import { Languages } from '../../Languages/Languages';
@@ -25,17 +25,8 @@ export const MobileMenu: FC<IBurgerMenuProps> = ({
     setShowBurgerMenu(false);
   };
 
-  const handleOpen = () => {
-    setShowBurgerMenu(true);
-  };
-
   return (
-    <SwipeableDrawer
-      anchor="right"
-      open={showBurgerMenu}
-      onClose={() => handleClose()}
-      onOpen={() => handleOpen()}
-    >
+    <Drawer anchor="right" open={showBurgerMenu} onClose={() => handleClose()}>
       <Stack width={'320px'} alignItems={'center'} paddingTop={'50px'}>
         <CloseButton handleClose={handleClose} />
         <Navigation />
@@ -44,6 +35,6 @@ export const MobileMenu: FC<IBurgerMenuProps> = ({
           <ThemeControls setDarkMode={setDarkMode} />
         </Stack>
       </Stack>
-    </SwipeableDrawer>
+    </Drawer>
   );
 };
