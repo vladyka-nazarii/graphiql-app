@@ -85,3 +85,9 @@
 .memberInfo {
   text-align: justify;
 }
+
+@media (max-width: 375px) {
+  .wrapper {
+    padding: 10px;
+  }
+}

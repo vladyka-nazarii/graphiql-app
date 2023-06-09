@@ -17,9 +17,15 @@ export const App = () => {
   const localDark = localStorage.getItem('darkTheme');
   const prefersDark = useMediaQuery('(prefers-color-scheme: dark)');
   const loading = useLoadUser();
+
   const theme = createTheme({
     palette: {
       mode: darkMode ? 'dark' : 'light',
+    },
+    transitions: {
+      duration: {
+        standard: 500,
+      },
     },
   });
 

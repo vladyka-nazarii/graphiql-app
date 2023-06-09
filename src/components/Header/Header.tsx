@@ -1,37 +1,20 @@
-import { ChangeEvent, Dispatch, SetStateAction, memo, useEffect, useState } from 'react';
-import { AppBar, Button, Container, Stack, Toolbar, Typography, useTheme } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import { Dispatch, SetStateAction, memo, useEffect, useState } from 'react';
+import { AppBar, Container, Toolbar, useMediaQuery, useTheme } from '@mui/material';
 
-import { useAuth } from '../../hooks/useAuth';
-import { signOutUser } from '../../firebase/sign-out-user';
-import { useAppDispatch } from '../../hooks/redux-hooks';
-import { removeUser } from '../../redux/slices/userSlice';
-import { Languages } from '../Languages/Languages';
-import { ThemeSwitcher } from '../ThemeSwitcher/ThemeSwitcher';
-import { SpaceX } from '../UI/SpaceX/SpaceX';
+import { DesktopMenu } from './DesktopMenu/DesktopMenu';
+import { MobileMenu } from './MobileMenu/MobileMenu';
+import { Logo } from './Logo/Logo';
+import { BurgerMenuButton } from '../UI/BurgerMenuButton/BurgerMenuButton';
 
 interface IHeaderProps {
   setDarkMode: Dispatch<SetStateAction<boolean>>;
 }
 
 export const Header = memo(({ setDarkMode }: IHeaderProps) => {
-  const { isAuth } = useAuth();
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const [isScrolled, setIsScrolled] = useState(false);
-  const { t } = useTranslation();
   const theme = useTheme();
-
-  const signOutHandler = async () => {
-    await signOutUser();
-    dispatch(removeUser());
-  };
-
-  const changeTheme = (_: ChangeEvent<HTMLInputElement>, checked: boolean) => {
-    setDarkMode(checked);
-    localStorage.setItem('darkTheme', JSON.stringify(checked));
-  };
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [showBurgerMenu, setShowBurgerMenu] = useState(false);
+  const isSmallScreen = useMediaQuery('(max-width: 767px)');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,49 +33,41 @@ export const Header = memo(({ setDarkMode }: IHeaderProps) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (!isSmallScreen) {
+      setShowBurgerMenu(false);
+    }
+  }, [isSmallScreen]);
+
+  const handleBurgerButton = () => {
+    setShowBurgerMenu((prev) => !prev);
+  };
+
   return (
     <AppBar
       color={isScrolled ? 'secondary' : 'primary'}
       enableColorOnDark={isScrolled}
-      sx={{ transition: 'all 0.6s', position: 'sticky', top: '0' }}
+      sx={{
+        transition: `all ${theme.transitions.duration.standard}ms`,
+        position: 'sticky',
+        top: '0',
+      }}
     >
       <Container>
         <Toolbar sx={{ justifyContent: 'space-between' }}>
-          <Stack sx={{ cursor: 'pointer' }} onClick={() => navigate('/')}>
-            <SpaceX dark={isScrolled && theme.palette.mode === 'dark'} />
-            <Typography variant="h6">{t('GraphQL Playground')}</Typography>
-          </Stack>
-          <Stack direction="row">
-            <ThemeSwitcher
-              sx={{ m: 1 }}
-              checked={theme.palette.mode === 'dark'}
-              onChange={changeTheme}
-              theme={theme}
-            />
-            <Languages />
-            <Button color="inherit" onClick={() => navigate('/welcome')}>
-              {t('About')}
-            </Button>
-            {isAuth ? (
-              <>
-                <Button color="inherit" onClick={() => navigate('/')}>
-                  {t('Main Page')}
-                </Button>
-                <Button color="inherit" onClick={signOutHandler}>
-                  {t('Sign Out')}
-                </Button>
-              </>
-            ) : (
-              <>
-                <Button color="inherit" onClick={() => navigate('/login')}>
-                  {t('Login')}
-                </Button>
-                <Button color="inherit" onClick={() => navigate('/register')}>
-                  {t('Register')}
-                </Button>
-              </>
-            )}
-          </Stack>
+          <Logo isScrolled={isScrolled} />
+          {isSmallScreen ? (
+            <>
+              <BurgerMenuButton handleBurgerButton={handleBurgerButton} />
+              <MobileMenu
+                setDarkMode={setDarkMode}
+                showBurgerMenu={showBurgerMenu}
+                setShowBurgerMenu={setShowBurgerMenu}
+              />
+            </>
+          ) : (
+            <DesktopMenu setDarkMode={setDarkMode} />
+          )}
         </Toolbar>
       </Container>
     </AppBar>

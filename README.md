@@ -1,4 +1,5 @@
 # GraphQL playground
+![GraphQL playground](https://github.com/vladyka-nazarii/graphiql-app/assets/109791286/a3092894-4130-4b23-ae47-e14a8a22aab5)
 
 This project is a sandbox for GraphQL and the [Final Task](https://github.com/rolling-scopes-school/tasks/blob/master/react/modules/graphiql.md) of the React course from [RS School](https://rs.school/). [SpaceX](https://studio.apollographql.com/public/SpaceX-pxxbxen/variant/current/explorer) was chosen as the main API, but if necessary, this sandbox can work with any API. Implemented user authorization, routing, request input field, response display field, section with variables and headers, searchable documentation.
 
