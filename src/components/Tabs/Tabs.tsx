@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import CodeMirror from '@uiw/react-codemirror';
 import { useTranslation } from 'react-i18next';
-import { useTheme } from '@mui/material';
+import { IconButton, useTheme } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 
 import { TabPanel } from './TabPanel';
 import { variablesValidation } from '../../apollo/variablesValidation';
@@ -16,6 +18,8 @@ interface BasicTabsProps {
   handleHeaders: (value: object) => void;
   handleVariablesValidation: (value: string) => void;
   handleHeadersValidation: (value: string) => void;
+  hideTabs: boolean;
+  handleHide: Dispatch<SetStateAction<boolean>>;
 }
 
 export const BasicTabs = ({
@@ -23,6 +27,8 @@ export const BasicTabs = ({
   handleHeaders,
   handleVariablesValidation,
   handleHeadersValidation,
+  hideTabs,
+  handleHide,
 }: BasicTabsProps) => {
   const [value, setValue] = useState(0);
   const [variablesValue, setVariablesValue] = useState('{}');
@@ -70,17 +76,27 @@ export const BasicTabs = ({
   };
 
   return (
-    <Box sx={{ width: '100%', height: 'calc(25vh - 64px - 61.5px)' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+    <Box sx={{ width: '100%' }}>
+      <Box
+        sx={{
+          borderBottom: 1,
+          borderColor: 'divider',
+          display: 'flex',
+          justifyContent: 'space-between',
+        }}
+      >
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab label={t('QUERY VARIABLES')} {...a11yProps(0)} />
           <Tab label={t('HTTP HEADERS')} {...a11yProps(1)} />
         </Tabs>
+        <IconButton onClick={() => handleHide((prevValue) => !prevValue)}>
+          {hideTabs ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+        </IconButton>
       </Box>
       <TabPanel value={value} index={0}>
         <CodeMirror
           value={variablesValue}
-          height="calc(25vh - 48px)"
+          height={hideTabs ? '0' : 'calc(25vh - 48px)'}
           width="100%"
           editable={true}
           theme={theme.palette.mode}
@@ -91,7 +107,7 @@ export const BasicTabs = ({
       <TabPanel value={value} index={1}>
         <CodeMirror
           value={headersValue}
-          height="calc(25vh - 48px)"
+          height={hideTabs ? '0' : 'calc(25vh - 48px)'}
           width="100%"
           editable={true}
           theme={theme.palette.mode}

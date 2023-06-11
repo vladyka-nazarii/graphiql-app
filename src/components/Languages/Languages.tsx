@@ -63,12 +63,6 @@ export const Languages = () => {
             Українська
           </div>
         </MenuItem>
-        <MenuItem data-value="ru" onClick={handleClose}>
-          <div className={styles.container}>
-            <img className={styles.icon} src="./ru.png" />
-            Русский
-          </div>
-        </MenuItem>
       </Menu>
     </div>
   );
