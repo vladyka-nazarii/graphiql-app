@@ -1,0 +1,14 @@
+@counter-style space-counter {
+  system: cyclic;
+  symbols: '\1F680''\1F30E''\1F320''\1F4E1''\1F30C';
+  suffix: ' ';
+}
+
+.experienceList {
+  align-self: flex-start;
+  margin-left: 30px;
+
+  & li {
+    list-style-type: space-counter;
+  }
+}

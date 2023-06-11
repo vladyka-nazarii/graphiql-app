@@ -3,3 +3,12 @@ export interface IUser {
   email: string;
   token: string;
 }
+
+export interface IMember {
+  id: number;
+  name: string;
+  avatarSrc: string;
+  isTeamLeader: boolean;
+  githubSrc: string;
+  translationKey: string;
+}
