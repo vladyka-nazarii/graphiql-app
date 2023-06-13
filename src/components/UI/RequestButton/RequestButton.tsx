@@ -1,7 +1,6 @@
 import { memo } from 'react';
+
 import styles from './RequestButton.module.scss';
-import { StopButton } from '../StopButton/StopButton';
-import { PlayButton } from '../PlayButton/PlayButton';
 
 interface IRequestButtonProps {
   onClick: () => void;
@@ -10,8 +9,12 @@ interface IRequestButtonProps {
 
 export const RequestButton = memo(({ onClick, loading }: IRequestButtonProps) => {
   return (
-    <div className={styles.button} onClick={onClick}>
-      {loading ? <StopButton /> : <PlayButton />}
+    <div className={styles.buttonWrapper} onClick={onClick}>
+      {loading ? (
+        <img className={styles.button} src="./stopButton.svg" alt="Stop" />
+      ) : (
+        <img className={styles.button} src="./playButton.svg" alt="Play" />
+      )}
     </div>
   );
 });

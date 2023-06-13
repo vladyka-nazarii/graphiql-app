@@ -1,0 +1,39 @@
+.footer {
+  background-color: #101e41;
+}
+
+.footerContainer {
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 24px;
+  margin: 0 auto;
+}
+
+.imgContainer {
+  display: flex;
+  justify-content: center;
+  width: 80px;
+}
+
+.img {
+  width: 80px;
+}
+
+.year {
+  font-size: 32px;
+  color: white;
+}
+
+@media (max-width: 767px) {
+  .img {
+    width: 60px;
+  }
+}
+
+@media (max-width: 600px) {
+  .footerContainer {
+    padding: 10px 12px;
+  }
+}
