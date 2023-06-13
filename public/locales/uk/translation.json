@@ -24,19 +24,13 @@
   "SCHEMA": "СХЕМА",
   "Search": "Пошук",
   "About the project": "Про проект",
-  "GraphiQL is a web-based playground for making GraphQL requests. It offers a user-friendly interface with features like syntax highlighting, auto-completion, and real-time response viewing. It allows developers to explore GraphQL APIs, debug queries, and collaborate on query development.": "GraphiQL — це веб-майданчик для створення запитів GraphQL. Він пропонує зручний інтерфейс із такими функціями, як підсвічування синтаксису, автозавершення та перегляд відповідей у реальному часі. Це дозволяє розробникам досліджувати API GraphQL, налагоджувати запити та співпрацювати над розробкою запитів.",
-  "The Rolling Scopes is an independent international developer community founded in 2013. Everyone can study at RS School, regardless of age, professional employment and place of residence. Volunteer developers from various companies and countries participate in the training. These courses combine online and offline learning. School mentors teach students in their free time and for free!": "The Rolling Scopes — незалежна міжнародна спільнота розробників, заснована в 2013 році. Навчатися в RS School може кожен, незалежно від віку, професійної діяльності та місця проживання. У тренінгу беруть участь розробники-волонтери з різних компаній і країн. Ці курси поєднують онлайн і офлайн навчання. Ментори школи навчають учнів у вільний час і безкоштовно!",
-  "Students of the RS School from the 2022Q3, which has passed RS School Stage #2 as well as new students with practical experience and knowledge of": "Студенти RS School 2022Q3, які пройшли RSSchool Stage #2, а також нові студенти з практичним досвідом і знаннями",
   "working with": "робота з",
   "Understanding of the": "Розуміння",
   "Nazarii Vladyka": "Владика Назарій",
   "Yevhenii Burkovskyi": "Бурковський Євгеній",
   "Maksym Kuzmych": "Кузьмич Максим",
-  "Team leader": "Керівник групи",
+  "Team leader,": "Керівник групи,",
   "Frontend developer": "Фронтенд-розробник",
-  "Served as the team leader and was responsible for the basic layout of the project. As the leader, provided guidance and direction to the team while taking charge of designing and structuring the user interface.": "Виконував обов’язки керівника групи та відповідав за базовий макет проекту. Як керівник, він керував командою та відповідав за розробку та структурування інтерфейсу користувача.",
-  "Firebase setup for user authentication. Development of forms, redirects and routes for registration and login. Development of documentation for the selected API. Parsing the scheme and implementing the ability to search for the required field.": "Сетап Firebase для автентифікації користувача. Розробка форм,редіректів та роутів для реєстрації та логіну. Розробка документації до обраного АПІ. Парсинг схеми та впровадження можливості пошуку необхідного поля.",
-  "Was responsible for creating the welcome page of the project. Designed and implemented the initial page that greets users and sets the tone for the application.": "Відповідав за створення вітальної сторінки проекту. Розроблено та реалізовано початкову сторінку, яка зустрічає користувачів і задає тон додатку.",
   "Email is required": "Потрібна пошта",
   "Invalid email": "Недійсна пошта",
   "Password is required": "Потрібен пароль",
@@ -48,5 +42,15 @@
   "At least 1 special symbol": "Мінімум 1 спец символ",
   "Wrong email or password": "Неправильна пошта або пароль",
   "Too many requests": "Забагато запитів",
-  "Email already exists": "Пошта вже існує"
+  "Email already exists": "Пошта вже існує",
+  "generalInfo": {
+    "graphiql": "GraphiQL — це веб-майданчик для створення запитів GraphQL. Він пропонує зручний інтерфейс із такими функціями, як підсвічування синтаксису, автозавершення та перегляд відповідей у реальному часі. Це дозволяє розробникам досліджувати API GraphQL, налагоджувати запити та співпрацювати над розробкою запитів.",
+    "rsschool": "The Rolling Scopes — незалежна міжнародна спільнота розробників, заснована в 2013 році. Навчатися в RS School може кожен, незалежно від віку, професійної діяльності та місця проживання. У тренінгу беруть участь розробники-волонтери з різних компаній і країн. Ці курси поєднують онлайн і офлайн навчання. Ментори школи навчають учнів у вільний час і безкоштовно!",
+    "participants": "Студенти RS School 2022Q3, які пройшли RSSchool Stage #2, а також нові студенти з практичним досвідом і знаннями"
+  },
+  "teamMemberInfo": {
+    "VladykaNazarii": "Виконував обов’язки керівника групи та відповідав за базовий макет проекту. Як керівник, він керував командою та відповідав за розробку та структурування інтерфейсу користувача.",
+    "YevheniiBurkovskyi": "Сетап Firebase для автентифікації користувача. Розробка форм,редіректів та роутів для реєстрації та логіну. Розробка документації до обраного АПІ. Парсинг схеми та впровадження можливості пошуку необхідного поля.",
+    "MaksymKuzmych": "Відповідав за створення вітальної сторінки проекту. Розроблено та реалізовано початкову сторінку, яка зустрічає користувачів і задає тон додатку. Також додав функціональність для роботи зі змінними та заголовками в GraphQL."
+  }
 }
