@@ -1,0 +1,52 @@
+.button {
+  position: absolute;
+  top: 45vh;
+  transform: rotate(180deg);
+  height: 120px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  writing-mode: vertical-rl;
+  font-size: 18px;
+  color: white;
+  background-color: green;
+  cursor: pointer;
+  right: 0;
+  transition: 0.3s;
+}
+
+.schema {
+  position: absolute;
+  height: 100%;
+  width: 400px;
+  border-left: 5px solid green;
+  top: 0;
+  right: 0;
+  transform: translateX(100%);
+  transition: 0.3s;
+  overflow-y: scroll;
+  padding: 10px;
+  z-index: 1000;
+}
+
+.opened {
+  right: 400px;
+}
+
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width: 500px) {
+  .schema {
+    width: 290px;
+  }
+
+  .opened {
+    right: 290px;
+  }
+}

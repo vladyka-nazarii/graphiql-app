@@ -1,0 +1,16 @@
+.mainContainer {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.main {
+  display: flex;
+  font-size: 18px;
+}
+
+@media (max-width: 767px) {
+  .main {
+    flex-direction: column;
+  }
+}
